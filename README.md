@@ -1,2 +1,2 @@
 ## Random Workspace
-Bundles stuff that don't have their own repository (yet).
+Code that doesn't have a repository (yet).
