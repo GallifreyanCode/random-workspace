@@ -4,27 +4,12 @@ import java.nio.*;
 import java.nio.charset.*;
 import java.util.Arrays;
 
-public class PrimitiveArrayConverter
-{
-	private PrimitiveArrayConverter()
-	{
+public class PrimitiveArrayConverter {
+	private PrimitiveArrayConverter() {
 	}
 
-	/**
-	 * Converts a provided set of characters in the specified character set, to
-	 * the corresponding set of bytes. No checks are performed on the inputs,
-	 * including null and length checks. These must be done by the client.
-	 * 
-	 * @param input
-	 *            The sequence of characters.
-	 * @param charsetName
-	 *            The character set of the character sequence.
-	 * @return The byte sequence representing the sequence of characters in the
-	 *         provided charset.
-	 * @throws CharacterCodingException
-	 */
-	static byte[] convertCharArrayToBytes(char[] input, String charsetName) throws CharacterCodingException
-	{
+	static byte[] convertCharArrayToBytes(char[] input, String charsetName)
+			throws CharacterCodingException {
 		CharBuffer charBuffer = CharBuffer.wrap(input);
 
 		/*
@@ -48,21 +33,8 @@ public class PrimitiveArrayConverter
 		return result;
 	}
 
-	/**
-	 * Converts a provided set of bytes in the specified character set, to the
-	 * corresponding set of characters. No checks are performed on the inputs,
-	 * including null and length checks. These must be done by the client.
-	 * 
-	 * @param input
-	 *            The sequence of bytes.
-	 * @param charsetName
-	 *            The character set of the byte sequence.
-	 * @return The character sequence representing the sequence of bytes in the
-	 *         provided charset.
-	 * @throws CharacterCodingException
-	 */
-	static char[] convertByteArrayToChars(byte[] input, String charsetName) throws CharacterCodingException
-	{
+	static char[] convertByteArrayToChars(byte[] input, String charsetName)
+			throws CharacterCodingException {
 		ByteBuffer buffer = ByteBuffer.wrap(input);
 
 		/*

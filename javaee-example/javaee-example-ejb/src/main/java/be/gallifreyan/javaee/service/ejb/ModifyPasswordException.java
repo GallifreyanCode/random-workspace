@@ -4,19 +4,14 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
-public class ModifyPasswordException extends ApplicationException
-{
+public class ModifyPasswordException extends ApplicationException {
+	private static final long serialVersionUID = 236461813446405979L;
 
-	private static final long serialVersionUID = 1L;
-
-	public ModifyPasswordException(String message)
-	{
+	public ModifyPasswordException(String message) {
 		super(message);
 	}
 
-	public ModifyPasswordException(Set<ConstraintViolation<?>> violations)
-	{
+	public ModifyPasswordException(Set<ConstraintViolation<?>> violations) {
 		super(violations);
 	}
-
 }

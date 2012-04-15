@@ -3,6 +3,8 @@ package be.gallifreyan.javaee.entity;
 import static org.junit.Assert.*;
 import static org.junit.matchers.JUnitMatchers.*;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 import org.junit.Test;
 
 public class AlbumOtherTests
@@ -19,8 +21,7 @@ public class AlbumOtherTests
 	{
 		Photo firstPhoto = new Photo("#1", new byte[] { 1 }, "#1", "#1");
 		Photo secondPhoto = new Photo("#2", new byte[] { 2 }, "#2", "#2");
-		assertFalse(firstPhoto .equals(secondPhoto));
-		//EqualsVerifier.forClass(Album.class).withPrefabValues(Photo.class, firstPhoto, secondPhoto).verify();
+		EqualsVerifier.forClass(Album.class).withPrefabValues(Photo.class, firstPhoto, secondPhoto).verify();
 	}
 
 	@Test

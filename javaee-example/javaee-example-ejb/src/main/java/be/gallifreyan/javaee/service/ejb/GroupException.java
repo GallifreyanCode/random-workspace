@@ -1,18 +1,13 @@
 package be.gallifreyan.javaee.service.ejb;
 
-public class GroupException extends ApplicationException
-{
+public class GroupException extends ApplicationException {
+	private static final long serialVersionUID = 6543664691465582518L;
 
-	private static final long serialVersionUID = 1L;
-
-	public GroupException(String message)
-	{
+	public GroupException(String message) {
 		super(message);
 	}
 
-	public GroupException(Throwable cause)
-	{
+	public GroupException(Throwable cause) {
 		super(cause);
 	}
-
 }

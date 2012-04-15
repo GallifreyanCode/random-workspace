@@ -17,8 +17,8 @@
 			<property name="javax.persistence.validation.group.pre-update"
 				value="be.gallifreyan.javaee.entity.PersistenceConstraint" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
-<!-- 			<property name="hibernate.transaction.jta.platform" -->
-<!-- 				value="org.hibernate.service.jta.platform.internal.WeblogicJtaPlatform" /> -->
+			<property name="hibernate.transaction.jta.platform"
+				value="org.hibernate.service.jta.platform.internal.WeblogicJtaPlatform" />
 		</properties>
 	</persistence-unit>
 </persistence>

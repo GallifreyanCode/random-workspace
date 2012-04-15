@@ -1,12 +1,10 @@
 package be.gallifreyan.javaee.service.ejb;
 
-
 import java.util.List;
 
 import be.gallifreyan.javaee.entity.*;
 
-public interface PhotoService
-{
+public interface PhotoService {
 
 	public Photo uploadPhoto(Photo photo, Album album) throws PhotoException;
 
@@ -14,7 +12,8 @@ public interface PhotoService
 
 	public void deletePhoto(Photo photo) throws PhotoException;
 
-	public Photo findPhotoById(long photoId, boolean withPhotoContent) throws PhotoException;
+	public Photo findPhotoById(long photoId, boolean withPhotoContent)
+			throws PhotoException;
 
 	public List<Photo> findPhotosByAlbum(Album album) throws PhotoException;
 
@@ -33,5 +32,4 @@ public interface PhotoService
 	public static final String FIND_PHOTO_BY_ID_INTERNAL_ERROR_MESSAGE = "FindPhotoById.InternalErrorMessage";
 
 	public static final String MODIFY_COVER_INTERNAL_ERROR_MESSAGE = "SetAlbumCover.InternalErrorMessage";
-
 }

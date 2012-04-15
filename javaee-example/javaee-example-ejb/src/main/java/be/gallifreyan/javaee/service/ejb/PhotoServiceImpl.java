@@ -1,6 +1,5 @@
 package be.gallifreyan.javaee.service.ejb;
 
-
 import java.security.Principal;
 import java.util.*;
 
@@ -19,13 +18,19 @@ import be.gallifreyan.javaee.repo.*;
 @RolesAllowed({ "RegisteredUsers" })
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class PhotoServiceImpl implements PhotoService {
-	private static final Logger logger = LoggerFactory.getLogger(PhotoServiceImpl.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(PhotoServiceImpl.class);
 
-	@Resource private SessionContext context;
-	@EJB private AlbumService albumService;
-	@EJB private UserRepository userRepository;
-	@EJB private AlbumRepository albumRepository;
-	@EJB private PhotoRepository photoRepository;
+	@Resource
+	private SessionContext context;
+	@EJB
+	private AlbumService albumService;
+	@EJB
+	private UserRepository userRepository;
+	@EJB
+	private AlbumRepository albumRepository;
+	@EJB
+	private PhotoRepository photoRepository;
 
 	public Photo uploadPhoto(Photo photo, Album album) throws PhotoException {
 		validatePhoto(photo);
@@ -33,16 +38,11 @@ public class PhotoServiceImpl implements PhotoService {
 		User user = findCurrentUser(UPLOAD_PHOTO_INTERNAL_ERROR_MESSAGE);
 		Album albumInRepository = albumRepository.findById(album.getAlbumId());
 		User albumOwner = albumInRepository.getUser();
-		if (!user.equals(albumOwner))
-		{
+		if (!user.equals(albumOwner)) {
 			throw new PhotoException(UPLOAD_PHOTO_INTERNAL_ERROR_MESSAGE);
-		}
-		else if (albumInRepository.getPhotos().contains(photo))
-		{
+		} else if (albumInRepository.getPhotos().contains(photo)) {
 			throw new PhotoException(DUPLICATE_PHOTO_ON_UPLOAD);
-		}
-		else
-		{
+		} else {
 			photo.setUploadTime(new Date());
 			photo.modifyAlbum(albumInRepository);
 			Photo createdPhoto = photoRepository.create(photo);
@@ -56,15 +56,12 @@ public class PhotoServiceImpl implements PhotoService {
 		User user = findCurrentUser(MODIFY_PHOTO_INTERNAL_ERROR_MESSAGE);
 		Photo foundPhoto = photoRepository.findById(photo.getPhotoId());
 		User photoOwner = foundPhoto.getAlbum().getUser();
-		if (user.equals(photoOwner))
-		{
+		if (user.equals(photoOwner)) {
 			foundPhoto.setTitle(photo.getTitle());
 			foundPhoto.setDescription(photo.getDescription());
 			Photo modifiedPhoto = photoRepository.modify(foundPhoto);
 			return modifiedPhoto;
-		}
-		else
-		{
+		} else {
 			throw new PhotoException(MODIFY_PHOTO_INTERNAL_ERROR_MESSAGE);
 		}
 	}
@@ -73,53 +70,44 @@ public class PhotoServiceImpl implements PhotoService {
 		User user = findCurrentUser(DELETE_PHOTO_INTERNAL_ERROR_MESSAGE);
 		Photo foundPhoto = photoRepository.findById(photo.getPhotoId());
 		User photoOwner = foundPhoto.getAlbum().getUser();
-		if (user.equals(photoOwner))
-		{
+		if (user.equals(photoOwner)) {
 			logger.info("Flagging to delete photo {}", foundPhoto);
 			photoRepository.delete(foundPhoto);
 			return;
-		}
-		else
-		{
+		} else {
 			throw new PhotoException(DELETE_PHOTO_INTERNAL_ERROR_MESSAGE);
 		}
 	}
 
-	public Photo findPhotoById(long photoId, boolean withContents) throws PhotoException {
+	public Photo findPhotoById(long photoId, boolean withContents)
+			throws PhotoException {
 		User user = findCurrentUser(FIND_PHOTO_BY_ID_INTERNAL_ERROR_MESSAGE);
 		Photo foundPhoto = photoRepository.findById(photoId);
 		User photoOwner = foundPhoto.getAlbum().getUser();
-		if (user.equals(photoOwner))
-		{
-			if (withContents)
-			{
+		if (user.equals(photoOwner)) {
+			if (withContents) {
 				int length = foundPhoto.getFile().length;
-				logger.info("Returning photo {} with content of size {} matching Id {}", new Object[] { foundPhoto,
-						length, photoId });
+				logger.info(
+						"Returning photo {} with content of size {} matching Id {}",
+						new Object[] { foundPhoto, length, photoId });
+				return foundPhoto;
+			} else {
+				logger.info("Returning photo {} matching Id {}", new Object[] {
+						foundPhoto, photoId });
 				return foundPhoto;
 			}
-			else
-			{
-				logger.info("Returning photo {} matching Id {}", new Object[] { foundPhoto, photoId });
-				return foundPhoto;
-			}
-		}
-		else
-		{
+		} else {
 			throw new PhotoException(FIND_PHOTO_BY_ID_INTERNAL_ERROR_MESSAGE);
 		}
 	}
 
 	public List<Photo> findPhotosByAlbum(Album album) throws PhotoException {
-		try
-		{
+		try {
 			Album foundAlbum = albumService.findAlbumById(album.getAlbumId());
 			Set<Photo> photoSet = foundAlbum.getPhotos();
 			List<Photo> photos = new ArrayList<Photo>(photoSet);
 			return photos;
-		}
-		catch (AlbumException albumEx)
-		{
+		} catch (AlbumException albumEx) {
 			throw new PhotoException(albumEx);
 		}
 	}
@@ -130,16 +118,11 @@ public class PhotoServiceImpl implements PhotoService {
 		User user = findCurrentUser(MODIFY_COVER_INTERNAL_ERROR_MESSAGE);
 		Album album = albumRepository.findById(photo.getAlbum().getAlbumId());
 		User albumOwner = album.getUser();
-		if (!user.equals(albumOwner))
-		{
+		if (!user.equals(albumOwner)) {
 			throw new PhotoException(MODIFY_COVER_INTERNAL_ERROR_MESSAGE);
-		}
-		else if (!album.getPhotos().contains(photo))
-		{
+		} else if (!album.getPhotos().contains(photo)) {
 			throw new PhotoException(MODIFY_COVER_INTERNAL_ERROR_MESSAGE);
-		}
-		else
-		{
+		} else {
 			album.modifyCoverPhoto(photo);
 			albumRepository.modify(album);
 		}
@@ -147,12 +130,14 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@SuppressWarnings("unchecked")
 	private void validatePhoto(Photo photo) throws PhotoException {
-		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 		@SuppressWarnings("rawtypes")
 		Set violations = validator.validate(photo);
-		if (violations.size() > 0)
-		{
-			logger.warn("An invalid album entity was provided. Violations detected were {}", violations);
+		if (violations.size() > 0) {
+			logger.warn(
+					"An invalid album entity was provided. Violations detected were {}",
+					violations);
 			throw new PhotoException(violations);
 		}
 	}
@@ -164,16 +149,15 @@ public class PhotoServiceImpl implements PhotoService {
 	 * @return
 	 * @throws PhotoException
 	 */
-	private User findCurrentUser(String contextExceptionMessage) throws PhotoException {
+	private User findCurrentUser(String contextExceptionMessage)
+			throws PhotoException {
 		Principal caller = context.getCallerPrincipal();
 		String userId = caller.getName();
 		User user = userRepository.findById(userId);
-		if (user == null)
-		{
+		if (user == null) {
 			logger.error("The principal for the caller was not found.");
 			throw new PhotoException(contextExceptionMessage);
 		}
 		return user;
 	}
-
 }

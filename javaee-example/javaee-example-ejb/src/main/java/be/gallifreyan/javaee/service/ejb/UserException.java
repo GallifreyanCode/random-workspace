@@ -4,18 +4,15 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
-public class UserException extends ApplicationException
-{
-
-	private static final long serialVersionUID = 1L;
+public class UserException extends ApplicationException {
+	private static final long serialVersionUID = 7219122160853191410L;
 
 	/**
 	 * 
 	 * @param message
 	 *            The key in the resource bundle for human-readable messages.
 	 */
-	public UserException(String message)
-	{
+	public UserException(String message) {
 		super(message);
 	}
 
@@ -24,8 +21,7 @@ public class UserException extends ApplicationException
 	 * @param cause
 	 *            The cause of the exception
 	 */
-	public UserException(Throwable cause)
-	{
+	public UserException(Throwable cause) {
 		super(cause);
 	}
 
@@ -36,14 +32,11 @@ public class UserException extends ApplicationException
 	 * @param cause
 	 *            The cause of the exception
 	 */
-	public UserException(String message, Throwable cause)
-	{
+	public UserException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	public UserException(Set<ConstraintViolation<?>> violations)
-	{
+	public UserException(Set<ConstraintViolation<?>> violations) {
 		super(violations);
 	}
-
 }

@@ -1,12 +1,10 @@
 package be.gallifreyan.javaee.service.ejb;
 
-
 import java.util.List;
 
 import be.gallifreyan.javaee.entity.*;
 
-public interface AlbumService
-{
+public interface AlbumService {
 
 	public Album createAlbum(Album album) throws AlbumException;
 

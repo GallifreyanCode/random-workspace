@@ -1,6 +1,5 @@
 package be.gallifreyan.javaee.service.ejb;
 
-
 import java.security.Principal;
 import java.util.*;
 
@@ -18,29 +17,24 @@ import be.gallifreyan.javaee.repo.*;
 @EJB(name = "java:global/javaee-example/javaee-example-ejb/AlbumService", beanInterface = AlbumService.class)
 @RolesAllowed({ "RegisteredUsers" })
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-public class AlbumServiceImpl implements AlbumService
-{
-	private static final Logger logger = LoggerFactory.getLogger(AlbumServiceImpl.class);
+public class AlbumServiceImpl implements AlbumService {
+	private static final Logger logger = LoggerFactory
+			.getLogger(AlbumServiceImpl.class);
 
 	@Resource
 	private SessionContext context;
-
 	@EJB
 	private UserRepository userRepository;
-
 	@EJB
 	private AlbumRepository albumRepository;
 
-	@Override
-	public Album createAlbum(Album album) throws AlbumException
-	{
+	public Album createAlbum(Album album) throws AlbumException {
 		validateAlbum(album);
 
 		User user = findCurrentUser(CREATE_ALBUM_INTERNAL_ERROR);
 
 		logger.debug("User's albums: {}", user.getAlbums());
-		if (user.getAlbums().contains(album))
-		{
+		if (user.getAlbums().contains(album)) {
 			logger.error("The album to be created, already exists.");
 			throw new AlbumException(DUPLICATE_ALBUM);
 		}
@@ -50,24 +44,19 @@ public class AlbumServiceImpl implements AlbumService
 		return createdAlbum;
 	}
 
-	@Override
-	public Album modifyAlbum(Album album) throws AlbumException
-	{
+	public Album modifyAlbum(Album album) throws AlbumException {
 		validateAlbum(album);
 
 		User user = findCurrentUser(MODIFY_ALBUM_INTERNAL_ERROR);
 
-		if (user.getAlbums().contains(album))
-		{
+		if (user.getAlbums().contains(album)) {
 			logger.error("The album modification would have resulted in a possible duplicate.");
 			throw new AlbumException(DUPLICATE_ALBUM_ON_MODIFY);
 		}
 
 		Album modifiedAlbum = null;
-		for (Album anAlbum : user.getAlbums())
-		{
-			if (anAlbum.getAlbumId() == album.getAlbumId())
-			{
+		for (Album anAlbum : user.getAlbums()) {
+			if (anAlbum.getAlbumId() == album.getAlbumId()) {
 				anAlbum.setName(album.getName());
 				anAlbum.setDescription(album.getDescription());
 				modifiedAlbum = albumRepository.modify(anAlbum);
@@ -75,23 +64,18 @@ public class AlbumServiceImpl implements AlbumService
 			}
 		}
 
-		if (modifiedAlbum == null)
-		{
+		if (modifiedAlbum == null) {
 			throw new AlbumException(MODIFY_ALBUM_INTERNAL_ERROR);
 		}
 		return modifiedAlbum;
 	}
 
-	@Override
-	public void deleteAlbum(Album album) throws AlbumException
-	{
+	public void deleteAlbum(Album album) throws AlbumException {
 		User user = findCurrentUser(DELETE_ALBUM_INTERNAL_ERROR);
 
 		boolean deletedFlag = false;
-		for (Album anAlbum : user.getAlbums())
-		{
-			if (anAlbum.equals(album))
-			{
+		for (Album anAlbum : user.getAlbums()) {
+			if (anAlbum.equals(album)) {
 				logger.info("Flagging to delete album {}", anAlbum);
 				albumRepository.delete(anAlbum);
 				deletedFlag = true;
@@ -99,17 +83,14 @@ public class AlbumServiceImpl implements AlbumService
 			}
 		}
 
-		if (deletedFlag == false)
-		{
+		if (deletedFlag == false) {
 			throw new AlbumException(DELETE_ALBUM_INTERNAL_ERROR);
 		}
 
 		return;
 	}
 
-	@Override
-	public List<Album> findCurrentUserAlbums() throws AlbumException
-	{
+	public List<Album> findCurrentUserAlbums() throws AlbumException {
 		User user = findCurrentUser(FIND_ALL_ALBUMS_INTERNAL_ERROR);
 
 		Set<Album> albumSet = user.getAlbums();
@@ -117,37 +98,28 @@ public class AlbumServiceImpl implements AlbumService
 		return albums;
 	}
 
-	@Override
-	public List<Album> findAllAlbumByOwner(User user) throws AlbumException
-	{
+	public List<Album> findAllAlbumByOwner(User user) throws AlbumException {
 		User userInRepository = userRepository.findById(user.getUserId());
-		if (userInRepository == null)
-		{
+		if (userInRepository == null) {
 			throw new AlbumException(FIND_ALBUM_BY_OWNER_ALBUM_INTERNAL_ERROR);
-		}
-		else
-		{
-			List<Album> albums = albumRepository.findAllByOwner(user.getUserId());
+		} else {
+			List<Album> albums = albumRepository.findAllByOwner(user
+					.getUserId());
 			return albums;
 		}
 	}
 
-	@Override
-	public Album findAlbumById(long albumId) throws AlbumException
-	{
+	public Album findAlbumById(long albumId) throws AlbumException {
 		User user = findCurrentUser(FIND_ALBUM_BY_ID_INTERNAL_ERROR);
 
 		Album album = null;
-		for (Album anAlbum : user.getAlbums())
-		{
-			if (anAlbum.getAlbumId() == albumId)
-			{
+		for (Album anAlbum : user.getAlbums()) {
+			if (anAlbum.getAlbumId() == albumId) {
 				album = anAlbum;
 				break;
 			}
 		}
-		if (album == null)
-		{
+		if (album == null) {
 			throw new AlbumException(ALBUM_NOT_FOUND);
 		}
 
@@ -159,14 +131,15 @@ public class AlbumServiceImpl implements AlbumService
 	 * @throws AlbumException
 	 */
 	@SuppressWarnings("unchecked")
-	private void validateAlbum(Album album) throws AlbumException
-	{
-		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	private void validateAlbum(Album album) throws AlbumException {
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 		@SuppressWarnings("rawtypes")
 		Set violations = validator.validate(album);
-		if (violations.size() > 0)
-		{
-			logger.warn("An invalid album entity was provided. Violations detected were {}", violations);
+		if (violations.size() > 0) {
+			logger.warn(
+					"An invalid album entity was provided. Violations detected were {}",
+					violations);
 			throw new AlbumException(violations);
 		}
 	}
@@ -178,17 +151,15 @@ public class AlbumServiceImpl implements AlbumService
 	 * @return
 	 * @throws AlbumException
 	 */
-	private User findCurrentUser(String contextExceptionMessage) throws AlbumException
-	{
+	private User findCurrentUser(String contextExceptionMessage)
+			throws AlbumException {
 		Principal caller = context.getCallerPrincipal();
 		String userId = caller.getName();
 		User user = userRepository.findById(userId);
-		if (user == null)
-		{
+		if (user == null) {
 			logger.error("The principal for the caller was not found.");
 			throw new AlbumException(contextExceptionMessage);
 		}
 		return user;
 	}
-
 }

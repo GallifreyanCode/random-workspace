@@ -2,8 +2,7 @@ package be.gallifreyan.javaee.service.ejb;
 
 import javax.validation.constraints.*;
 
-public class ModifyPasswordRequest
-{
+public class ModifyPasswordRequest {
 
 	@NotNull(message = "{ModifyPasswordRequest.oldPassword.notNull}")
 	@Size(min = 1, max = 500, message = "{ModifyPasswordRequest.oldPassword.size}")
@@ -17,45 +16,37 @@ public class ModifyPasswordRequest
 	@Size(min = 1, max = 500, message = "ModifyPasswordRequest.confirmNewPassword.size")
 	private char[] confirmNewPassword;
 
-	public ModifyPasswordRequest()
-	{
+	public ModifyPasswordRequest() {
 	}
 
-	public ModifyPasswordRequest(char[] oldPassword, char[] newPassword, char[] confirmNewPassword)
-	{
+	public ModifyPasswordRequest(char[] oldPassword, char[] newPassword,
+			char[] confirmNewPassword) {
 		this.oldPassword = oldPassword;
 		this.newPassword = newPassword;
 		this.confirmNewPassword = confirmNewPassword;
 	}
 
-	public char[] getOldPassword()
-	{
+	public char[] getOldPassword() {
 		return oldPassword;
 	}
 
-	public void setOldPassword(char[] oldPassword)
-	{
+	public void setOldPassword(char[] oldPassword) {
 		this.oldPassword = oldPassword;
 	}
 
-	public char[] getNewPassword()
-	{
+	public char[] getNewPassword() {
 		return newPassword;
 	}
 
-	public void setNewPassword(char[] newPassword)
-	{
+	public void setNewPassword(char[] newPassword) {
 		this.newPassword = newPassword;
 	}
 
-	public char[] getConfirmNewPassword()
-	{
+	public char[] getConfirmNewPassword() {
 		return confirmNewPassword;
 	}
 
-	public void setConfirmNewPassword(char[] confirmNewPassword)
-	{
+	public void setConfirmNewPassword(char[] confirmNewPassword) {
 		this.confirmNewPassword = confirmNewPassword;
 	}
-
 }

@@ -1,6 +1,5 @@
 package be.gallifreyan.javaee.entity;
 
-public interface PersistenceConstraint
-{
+public interface PersistenceConstraint {
 
 }

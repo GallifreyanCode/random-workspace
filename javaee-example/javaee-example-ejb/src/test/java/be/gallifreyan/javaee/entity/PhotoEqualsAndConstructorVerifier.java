@@ -2,6 +2,8 @@ package be.gallifreyan.javaee.entity;
 
 import static org.junit.Assert.*;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 import org.junit.Test;
 
 public class PhotoEqualsAndConstructorVerifier
@@ -20,8 +22,7 @@ public class PhotoEqualsAndConstructorVerifier
 	{
 		Album firstAlbum = new Album("#1", "Album #1");
 		Album secondAlbum = new Album("#2", "Album #2");
-		assertFalse(firstAlbum.equals(secondAlbum));
-		//EqualsVerifier.forClass(Photo.class).withPrefabValues(Album.class, firstAlbum, secondAlbum).verify();
+		EqualsVerifier.forClass(Photo.class).withPrefabValues(Album.class, firstAlbum, secondAlbum).verify();
 	}
 
 	@Test

@@ -2,6 +2,8 @@ package be.gallifreyan.javaee.entity;
 
 import static org.junit.Assert.*;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 import org.junit.Test;
 
 public class GroupEqualsAndConstructorVerifier
@@ -15,7 +17,7 @@ public class GroupEqualsAndConstructorVerifier
 	@Test
 	public final void testEqualsAndHashcode() throws Exception
 	{
-		//EqualsVerifier.forClass(Group.class).verify();
+		EqualsVerifier.forClass(Group.class).verify();
 	}
 
 	@Test

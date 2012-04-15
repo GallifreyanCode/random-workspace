@@ -2,6 +2,8 @@ package be.gallifreyan.javaee.entity;
 
 import static org.junit.Assert.*;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 import org.junit.Test;
 
 public class UserEqualsAndConstructorVerifier
@@ -16,7 +18,7 @@ public class UserEqualsAndConstructorVerifier
 	@Test
 	public final void testEqualsAndHashcode() throws Exception
 	{
-		//EqualsVerifier.forClass(User.class).verify();
+		EqualsVerifier.forClass(User.class).verify();
 	}
 
 	@Test

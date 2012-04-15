@@ -15,6 +15,9 @@
 		<hibernate.version>3.6.10.Final</hibernate.version>
 		<hibernate.validator.version>4.2.0.Final</hibernate.validator.version>
 		<derby.version>10.8.2.2</derby.version>
+		<dbunit.version>2.4.8</dbunit.version>
+		<glassfish.embedded.version>3.1</glassfish.embedded.version>
+		<equalsverifier.version>1.1.2</equalsverifier.version>
 		<ejb.plugin.version>2.3</ejb.plugin.version>
 		<ejb.version>3.1</ejb.version>
 		<surefire.plugin.version>2.12</surefire.plugin.version>
@@ -54,13 +57,19 @@
 		<dependency>
 			<groupId>org.dbunit</groupId>
 			<artifactId>dbunit</artifactId>
-			<version>2.4.8</version>
+			<version>${dbunit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.extras</groupId>
 			<artifactId>glassfish-embedded-all</artifactId>
-			<version>3.1</version>
+			<version>${glassfish.embedded.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>nl.jqno.equalsverifier</groupId>
+			<artifactId>equalsverifier</artifactId>
+			<version>${equalsverifier.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -114,13 +123,13 @@
 									overwrite="true" />
 								<!--replace the "proper" persistence.xml with the "test" version -->
 								<copy
-									file="${project.build.testOutputDirectory}/META-INF/persistence-test.xml"
+									file="${project.build.testOutputDirectory}/META-INF/${persistence.xml}"
 									tofile="${project.build.outputDirectory}/META-INF/persistence.xml"
 									overwrite="true" />
 								<!-- copy the "test" version also to the instrumented classes directory 
 									of Cobertura. This is for Sonar and for any future usage of Cobertura -->
 								<copy
-									file="${project.build.testOutputDirectory}/META-INF/persistence-test.xml"
+									file="${project.build.testOutputDirectory}/META-INF/${persistence.xml}"
 									tofile="${project.build.directory}/generated-classes/cobertura/META-INF/persistence.xml"
 									overwrite="true" />
 							</tasks>
@@ -232,11 +241,31 @@
 
 	<profiles>
 		<profile>
-			<id>development</id>
+			<id>development-glassfish</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
+				<persistence.xml>persistence-test</persistence.xml>
+				<jdbc.url>jdbc:derby://localhost:1527/JAVAEEEXAMPLE</jdbc.url>
+				<jdbc.user>APP</jdbc.user>
+				<jdbc.password>APP</jdbc.password>
+				<glassfish.home>C:\Apps\AServers\glassfishv3\glassfish
+				</glassfish.home>
+				<glassfish.domainName>test-domain</glassfish.domainName>
+				<glassfish.user>admin</glassfish.user>
+				<glassfish.port.admin>10048</glassfish.port.admin>
+				<glassfish.port.http>10080</glassfish.port.http>
+				<glassfish.port.https>10081</glassfish.port.https>
+				<glassfish.password.file>${glassfish.home}\domains\${glassfish.domain}\config\local-password
+				</glassfish.password.file>
+			</properties>
+		</profile>
+		<profile>
+			<id>development-weblogic</id>
+			<!-- needs custom persistence, make persitence.xml name a variable -->
+			<properties>
+				<persistence.xml>persistence-weblogic</persistence.xml>
 				<jdbc.url>jdbc:derby://localhost:1527/JAVAEEEXAMPLE</jdbc.url>
 				<jdbc.user>APP</jdbc.user>
 				<jdbc.password>APP</jdbc.password>
