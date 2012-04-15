@@ -1,4 +1,9 @@
 ##Java EE 6 Example
+
+###Requirements
+
+ * Java 7 JDK
+
 ###Derby Configuration
 Navigate to the derby directory.
 
