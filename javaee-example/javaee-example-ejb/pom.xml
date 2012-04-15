@@ -123,13 +123,13 @@
 									overwrite="true" />
 								<!--replace the "proper" persistence.xml with the "test" version -->
 								<copy
-									file="${project.build.testOutputDirectory}/META-INF/${persistence.xml}"
+									file="${project.build.testOutputDirectory}/META-INF/${persistence.xml}.xml"
 									tofile="${project.build.outputDirectory}/META-INF/persistence.xml"
 									overwrite="true" />
 								<!-- copy the "test" version also to the instrumented classes directory 
 									of Cobertura. This is for Sonar and for any future usage of Cobertura -->
 								<copy
-									file="${project.build.testOutputDirectory}/META-INF/${persistence.xml}"
+									file="${project.build.testOutputDirectory}/META-INF/${persistence.xml}.xml"
 									tofile="${project.build.directory}/generated-classes/cobertura/META-INF/persistence.xml"
 									overwrite="true" />
 							</tasks>
