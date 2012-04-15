@@ -1,8 +1,6 @@
 package be.gallifreyan.javaee.registration.context;
 
-public class TestContext
-{
-
+public class TestContext {
 	private Class<?> clazz;
 	private String property;
 	private Class<?> inverseClazz;
@@ -11,9 +9,8 @@ public class TestContext
 	private CollectionTestType collectionTestType;
 	private PropertyTestType propertyTestType;
 
-	public TestContext(Class<?> clazz, String property, Class<?> inverseClazz, String inverseProperty,
-			RelationType relationType)
-	{
+	public TestContext(Class<?> clazz, String property, Class<?> inverseClazz,
+			String inverseProperty, RelationType relationType) {
 		this.clazz = clazz;
 		this.property = property;
 		this.inverseClazz = inverseClazz;
@@ -21,8 +18,7 @@ public class TestContext
 		this.relationType = relationType;
 	}
 
-	public TestContext(TestContext context)
-	{
+	public TestContext(TestContext context) {
 		this.clazz = context.getClazz();
 		this.property = context.getProperty();
 		this.inverseClazz = context.getInverseClazz();
@@ -30,82 +26,73 @@ public class TestContext
 		this.relationType = context.getRelationType();
 	}
 
-	public Class<?> getClazz()
-	{
+	public Class<?> getClazz() {
 		return clazz;
 	}
 
-	public void setClazz(Class<?> clazz)
-	{
+	public void setClazz(Class<?> clazz) {
 		this.clazz = clazz;
 	}
 
-	public String getProperty()
-	{
+	public String getProperty() {
 		return property;
 	}
 
-	public void setProperty(String property)
-	{
+	public void setProperty(String property) {
 		this.property = property;
 	}
 
-	public Class<?> getInverseClazz()
-	{
+	public Class<?> getInverseClazz() {
 		return inverseClazz;
 	}
 
-	public void setInverseClazz(Class<?> inverseClazz)
-	{
+	public void setInverseClazz(Class<?> inverseClazz) {
 		this.inverseClazz = inverseClazz;
 	}
 
-	public String getInverseProperty()
-	{
+	public String getInverseProperty() {
 		return inverseProperty;
 	}
 
-	public void setInverseProperty(String inverseProperty)
-	{
+	public void setInverseProperty(String inverseProperty) {
 		this.inverseProperty = inverseProperty;
 	}
 
-	public RelationType getRelationType()
-	{
+	public RelationType getRelationType() {
 		return relationType;
 	}
 
-	public void setRelationType(RelationType relationType)
-	{
+	public void setRelationType(RelationType relationType) {
 		this.relationType = relationType;
 	}
 
-	public CollectionTestType getCollectionTestType()
-	{
+	public CollectionTestType getCollectionTestType() {
 		return collectionTestType;
 	}
 
-	public void setCollectionTestType(CollectionTestType collectionTestType)
-	{
+	public void setCollectionTestType(CollectionTestType collectionTestType) {
 		this.collectionTestType = collectionTestType;
 	}
 
-	public PropertyTestType getPropertyTestType()
-	{
+	public PropertyTestType getPropertyTestType() {
 		return propertyTestType;
 	}
 
-	public void setPropertyTestType(PropertyTestType propertyTestType)
-	{
+	public void setPropertyTestType(PropertyTestType propertyTestType) {
 		this.propertyTestType = propertyTestType;
 	}
 
-	@Override
-	public String toString()
-	{
-		return " \"" + property + "\" in class " + clazz + " , having inverse \"" + inverseProperty + "\" in class "
-				+ inverseClazz + ", with test to be executed being:"
-				+ (collectionTestType == null ? propertyTestType : collectionTestType);
+	public String toString() {
+		return " \""
+				+ property
+				+ "\" in class "
+				+ clazz
+				+ " , having inverse \""
+				+ inverseProperty
+				+ "\" in class "
+				+ inverseClazz
+				+ ", with test to be executed being:"
+				+ (collectionTestType == null ? propertyTestType
+						: collectionTestType);
 	}
-
 }

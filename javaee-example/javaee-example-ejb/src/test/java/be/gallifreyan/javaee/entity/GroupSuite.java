@@ -5,8 +5,9 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ GroupBeanVerifier.class, GroupEqualsAndConstructorVerifier.class, GroupMutualRegistrationVerifier.class })
-public class GroupSuite
-{
+@SuiteClasses({ GroupBeanVerifier.class,
+		GroupEqualsAndConstructorVerifier.class,
+		GroupMutualRegistrationVerifier.class })
+public class GroupSuite {
 
 }

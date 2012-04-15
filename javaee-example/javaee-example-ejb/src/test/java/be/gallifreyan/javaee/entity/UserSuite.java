@@ -5,8 +5,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ UserBeanVerifier.class, UserEqualsAndConstructorVerifier.class, UserMutualRegistrationVerifier.class })
-public class UserSuite
-{
+@SuiteClasses({ UserBeanVerifier.class, UserEqualsAndConstructorVerifier.class,
+		UserMutualRegistrationVerifier.class })
+public class UserSuite {
 
 }

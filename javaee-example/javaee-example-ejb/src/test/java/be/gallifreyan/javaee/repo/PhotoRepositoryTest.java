@@ -10,21 +10,17 @@ import org.slf4j.*;
 
 import be.gallifreyan.javaee.entity.*;
 
-public class PhotoRepositoryTest extends AbstractRepositoryTest
-{
-	static final Logger logger = LoggerFactory.getLogger(AlbumRepositoryTest.class);
-
+public class PhotoRepositoryTest extends AbstractRepositoryTest {
+	private static final Logger logger = LoggerFactory
+			.getLogger(AlbumRepositoryTest.class);
 	private PhotoRepository repository;
 	private AlbumRepository albumRepository;
 	private UserRepository userRepository;
-
 	private User user;
-
 	private Album album;
 
 	@Override
-	public void setUp() throws Exception
-	{
+	public void setUp() throws Exception {
 		super.setUp();
 		user = new User(TEST_USER_ID, TEST_PASSWORD);
 		userRepository = new UserRepository(em);
@@ -41,8 +37,7 @@ public class PhotoRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testCreatePhoto() throws Exception
-	{
+	public void testCreatePhoto() throws Exception {
 		Photo photo = new Photo(TEST_PHOTO_NAME, TEST_PHOTO_CONTENT);
 		photo.modifyAlbum(album);
 		photo.setUploadTime(new Date());
@@ -60,8 +55,7 @@ public class PhotoRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testModifyPhoto() throws Exception
-	{
+	public void testModifyPhoto() throws Exception {
 		// Setup
 		Photo photo = new Photo(TEST_PHOTO_NAME, TEST_PHOTO_CONTENT);
 		photo.modifyAlbum(album);
@@ -90,8 +84,7 @@ public class PhotoRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testDeletePhoto() throws Exception
-	{
+	public void testDeletePhoto() throws Exception {
 		// Setup
 		Photo photo = new Photo(TEST_PHOTO_NAME, TEST_PHOTO_CONTENT);
 		photo.modifyAlbum(album);
@@ -113,8 +106,7 @@ public class PhotoRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testFindPhotoById() throws Exception
-	{
+	public void testFindPhotoById() throws Exception {
 		// Setup
 		Photo photo = new Photo(TEST_PHOTO_NAME, TEST_PHOTO_CONTENT);
 		photo.modifyAlbum(album);
@@ -134,8 +126,7 @@ public class PhotoRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testFindAllPhotos() throws Exception
-	{
+	public void testFindAllPhotos() throws Exception {
 		// Setup
 		Photo photo = new Photo(TEST_PHOTO_NAME, TEST_PHOTO_CONTENT);
 		photo.modifyAlbum(album);
@@ -154,8 +145,7 @@ public class PhotoRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testFindAllPhotosByAlbum() throws Exception
-	{
+	public void testFindAllPhotosByAlbum() throws Exception {
 		// Setup
 		Photo photo = new Photo(TEST_PHOTO_NAME, TEST_PHOTO_CONTENT);
 		photo.modifyAlbum(album);
@@ -166,7 +156,8 @@ public class PhotoRepositoryTest extends AbstractRepositoryTest
 		em.clear();
 
 		// Execute
-		List<Photo> foundPhotos = repository.findPhotosByAlbum(album.getAlbumId());
+		List<Photo> foundPhotos = repository.findPhotosByAlbum(album
+				.getAlbumId());
 
 		// Verify
 		assertNotNull(foundPhotos);

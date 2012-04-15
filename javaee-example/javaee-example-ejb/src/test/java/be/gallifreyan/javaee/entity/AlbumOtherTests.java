@@ -7,26 +7,21 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 
 import org.junit.Test;
 
-public class AlbumOtherTests
-{
-
+public class AlbumOtherTests {
 	private static final String TEST_ALBUM_NAME = "TEST ALBUM";
 	private static final String TEST_ALBUM_DESCRIPTION = "TEST ALBUM DESCRIPTION";
 
-	/**
-	 * Test method for {@link info.galleria.entities.User#hashCode()}.
-	 */
 	@Test
-	public final void testEqualsAndHashcode() throws Exception
-	{
+	public final void testEqualsAndHashcode() throws Exception {
 		Photo firstPhoto = new Photo("#1", new byte[] { 1 }, "#1", "#1");
 		Photo secondPhoto = new Photo("#2", new byte[] { 2 }, "#2", "#2");
-		EqualsVerifier.forClass(Album.class).withPrefabValues(Photo.class, firstPhoto, secondPhoto).verify();
+		EqualsVerifier.forClass(Album.class)
+				.withPrefabValues(Photo.class, firstPhoto, secondPhoto)
+				.verify();
 	}
 
 	@Test
-	public void testNoArgConstructor() throws Exception
-	{
+	public void testNoArgConstructor() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 
 		assertNotNull(album);
@@ -35,8 +30,7 @@ public class AlbumOtherTests
 	}
 
 	@Test
-	public void testSetCoverOnAddition() throws Exception
-	{
+	public void testSetCoverOnAddition() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		Photo firstPhoto = new Photo("#1", new byte[] { 1 }, "#1", "#1");
 
@@ -48,8 +42,7 @@ public class AlbumOtherTests
 	}
 
 	@Test
-	public void testSetCoverOnMultipleAddition() throws Exception
-	{
+	public void testSetCoverOnMultipleAddition() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		Photo firstPhoto = new Photo("#1", new byte[] { 1 }, "#1", "#1");
 		Photo secondPhoto = new Photo("#2", new byte[] { 2 }, "#2", "#2");
@@ -63,8 +56,7 @@ public class AlbumOtherTests
 	}
 
 	@Test
-	public void testClearCoverPhoto() throws Exception
-	{
+	public void testClearCoverPhoto() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		Photo firstPhoto = new Photo("#1", new byte[] { 1 }, "#1", "#1");
 		album.addToPhotos(firstPhoto);
@@ -77,8 +69,7 @@ public class AlbumOtherTests
 	}
 
 	@Test
-	public void testClearCoverForEmptyAlbum() throws Exception
-	{
+	public void testClearCoverForEmptyAlbum() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 
 		album.clearCoverPhoto();
@@ -87,8 +78,7 @@ public class AlbumOtherTests
 	}
 
 	@Test
-	public void testModifyCoverPhotoWithNull() throws Exception
-	{
+	public void testModifyCoverPhotoWithNull() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		Photo firstPhoto = new Photo("#1", new byte[] { 1 }, "#1", "#1");
 		album.addToPhotos(firstPhoto);
@@ -101,8 +91,7 @@ public class AlbumOtherTests
 	}
 
 	@Test
-	public void testModifyCoverPhotoWithValidPhoto() throws Exception
-	{
+	public void testModifyCoverPhotoWithValidPhoto() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		Photo firstPhoto = new Photo("#1", new byte[] { 1 }, "#1", "#1");
 		Photo secondPhoto = new Photo("#2", new byte[] { 2 }, "#2", "#2");
@@ -118,8 +107,7 @@ public class AlbumOtherTests
 	}
 
 	@Test
-	public void testModifyAlbumCoverToExisting() throws Exception
-	{
+	public void testModifyAlbumCoverToExisting() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		Photo firstPhoto = new Photo("#1", new byte[] { 1 }, "#1", "#1");
 		album.addToPhotos(firstPhoto);
@@ -131,8 +119,7 @@ public class AlbumOtherTests
 	}
 
 	@Test
-	public void testGetCoverPhotoForEmptyAlbum() throws Exception
-	{
+	public void testGetCoverPhotoForEmptyAlbum() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		Photo firstPhoto = new Photo("#1", new byte[] { 1 }, "#1", "#1");
 		Photo secondPhoto = new Photo("#2", new byte[] { 2 }, "#2", "#2");
@@ -147,8 +134,7 @@ public class AlbumOtherTests
 	}
 
 	@Test
-	public void testGetCoverPhotoOnRemove() throws Exception
-	{
+	public void testGetCoverPhotoOnRemove() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		Photo firstPhoto = new Photo("#1", new byte[] { 1 }, "#1", "#1");
 		Photo secondPhoto = new Photo("#2", new byte[] { 2 }, "#2", "#2");
@@ -163,8 +149,7 @@ public class AlbumOtherTests
 	}
 
 	@Test
-	public void testRandomCoverPhotoOnRemove() throws Exception
-	{
+	public void testRandomCoverPhotoOnRemove() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		Photo firstPhoto = new Photo("#1", new byte[] { 1 }, "#1", "#1");
 		Photo secondPhoto = new Photo("#2", new byte[] { 2 }, "#2", "#2");
@@ -180,8 +165,8 @@ public class AlbumOtherTests
 		album.removeFromPhotos(firstPhoto);
 
 		assertEquals(4, album.getPhotos().size());
-		assertThat(album.getPhotos(), hasItems(secondPhoto, thirdPhoto, fourthPhoto, fifthPhoto));
+		assertThat(album.getPhotos(),
+				hasItems(secondPhoto, thirdPhoto, fourthPhoto, fifthPhoto));
 		assertThat(album.getPhotos(), hasItem(album.getCoverPhoto()));
 	}
-
 }

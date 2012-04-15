@@ -12,18 +12,15 @@ import org.slf4j.*;
 
 import be.gallifreyan.javaee.entity.*;
 
-public class AlbumRepositoryTest extends AbstractRepositoryTest
-{
-	static final Logger logger = LoggerFactory.getLogger(AlbumRepositoryTest.class);
-
+public class AlbumRepositoryTest extends AbstractRepositoryTest {
+	private static final Logger logger = LoggerFactory
+			.getLogger(AlbumRepositoryTest.class);
 	private AlbumRepository repository;
 	private UserRepository userRepository;
-
 	private User user;
 
 	@Override
-	public void setUp() throws Exception
-	{
+	public void setUp() throws Exception {
 		super.setUp();
 		userRepository = new UserRepository(em);
 		user = new User(TEST_USER_ID, TEST_PASSWORD);
@@ -34,8 +31,7 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testCreateNewAlbum() throws Exception
-	{
+	public void testCreateNewAlbum() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		album.modifyUser(user);
 
@@ -51,8 +47,7 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testModifyAlbum() throws Exception
-	{
+	public void testModifyAlbum() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		album.modifyUser(user);
 		Album createdAlbum = repository.create(album);
@@ -76,8 +71,7 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testModifyAlbumAddPhoto() throws Exception
-	{
+	public void testModifyAlbumAddPhoto() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		album.modifyUser(user);
 		Album createdAlbum = repository.create(album);
@@ -98,8 +92,7 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testModifyAlbumAddMulitplePhotos() throws Exception
-	{
+	public void testModifyAlbumAddMulitplePhotos() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		album.modifyUser(user);
 		Album createdAlbum = repository.create(album);
@@ -123,8 +116,7 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testModifyAlbumRemovePhoto() throws Exception
-	{
+	public void testModifyAlbumRemovePhoto() throws Exception {
 		// Setup
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		album.modifyUser(user);
@@ -150,8 +142,7 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testModifyAlbumRemoveMultiplePhotos() throws Exception
-	{
+	public void testModifyAlbumRemoveMultiplePhotos() throws Exception {
 		// Setup
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		album.modifyUser(user);
@@ -179,12 +170,12 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 		Album actualAlbum = em.find(Album.class, modifiedAlbum.getAlbumId());
 		assertEquals(modifiedAlbum, actualAlbum);
 		assertThat(actualAlbum.getPhotos(), hasItems(secondPhoto, thirdPhoto));
-		assertThat(actualAlbum.getCoverPhoto(), either(equalTo(secondPhoto)).or(equalTo(thirdPhoto)));
+		assertThat(actualAlbum.getCoverPhoto(), either(equalTo(secondPhoto))
+				.or(equalTo(thirdPhoto)));
 	}
 
 	@Test
-	public void testModifyAlbumModifyPhoto() throws Exception
-	{
+	public void testModifyAlbumModifyPhoto() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		album.modifyUser(user);
 		Album createdAlbum = repository.create(album);
@@ -200,10 +191,8 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 		String modifiedDescription = "New Description";
 
 		long photoId = 0;
-		for (Photo eachPhoto : createdAlbum.getPhotos())
-		{
-			if (eachPhoto.equals(photo))
-			{
+		for (Photo eachPhoto : createdAlbum.getPhotos()) {
+			if (eachPhoto.equals(photo)) {
 				photoId = eachPhoto.getPhotoId();
 				eachPhoto.setTitle(modifiedTitle);
 				eachPhoto.setDescription(modifiedDescription);
@@ -226,8 +215,7 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testDeleteAlbum() throws Exception
-	{
+	public void testDeleteAlbum() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		album.modifyUser(user);
 		em.persist(album);
@@ -245,8 +233,7 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testDeleteAlbumWithPhoto() throws Exception
-	{
+	public void testDeleteAlbumWithPhoto() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		album.modifyUser(user);
 		em.persist(album);
@@ -270,8 +257,7 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testFindAlbumById() throws Exception
-	{
+	public void testFindAlbumById() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		album.modifyUser(user);
 		Album createdAlbum = repository.create(album);
@@ -287,8 +273,7 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testFindAllAlbums() throws Exception
-	{
+	public void testFindAllAlbums() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		album.modifyUser(user);
 		Album createdAlbum = repository.create(album);
@@ -305,8 +290,7 @@ public class AlbumRepositoryTest extends AbstractRepositoryTest
 	}
 
 	@Test
-	public void testFindAllAlbumsByOwner() throws Exception
-	{
+	public void testFindAllAlbumsByOwner() throws Exception {
 		Album album = new Album(TEST_ALBUM_NAME, TEST_ALBUM_DESCRIPTION);
 		album.modifyUser(user);
 		Album createdAlbum = repository.create(album);

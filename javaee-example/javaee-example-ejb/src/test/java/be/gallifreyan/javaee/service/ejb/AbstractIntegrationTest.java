@@ -17,9 +17,9 @@ import org.junit.*;
 import org.junit.rules.TestName;
 import org.slf4j.*;
 
-public class AbstractIntegrationTest
-{
-	private static final Logger logger = LoggerFactory.getLogger(AbstractIntegrationTest.class);
+public class AbstractIntegrationTest {
+	private static final Logger logger = LoggerFactory
+			.getLogger(AbstractIntegrationTest.class);
 
 	protected static boolean isRunFromSuite = false;
 	protected static EJBContainer container;
@@ -36,14 +36,10 @@ public class AbstractIntegrationTest
 	 * 
 	 * @throws Exception
 	 */
-	public static void setUpBeforeClass() throws Exception
-	{
-		if (isRunFromSuite && container != null)
-		{
+	public static void setUpBeforeClass() throws Exception {
+		if (isRunFromSuite && container != null) {
 			// Do nothing. The test suite has initialized everything.
-		}
-		else
-		{
+		} else {
 			startup();
 		}
 	}
@@ -55,14 +51,10 @@ public class AbstractIntegrationTest
 	 * 
 	 * @throws Exception
 	 */
-	public static void tearDownAfterClass() throws Exception
-	{
-		if (isRunFromSuite)
-		{
+	public static void tearDownAfterClass() throws Exception {
+		if (isRunFromSuite) {
 			// Do nothing. The test suite will shutdown everything.
-		}
-		else
-		{
+		} else {
 			shutdown();
 		}
 	}
@@ -77,8 +69,7 @@ public class AbstractIntegrationTest
 	 * 
 	 * @throws Exception
 	 */
-	public static void startup() throws Exception
-	{
+	public static void startup() throws Exception {
 		logger.info("Starting the embedded container.");
 		Map<String, Object> props = new HashMap<String, Object>();
 		props.put("org.glassfish.ejb.embedded.glassfish.installation.root",
@@ -91,8 +82,7 @@ public class AbstractIntegrationTest
 	/**
 	 * Shuts down the embedded container.
 	 */
-	public static void shutdown()
-	{
+	public static void shutdown() {
 		logger.info("Shutting down the embedded container.");
 		container.close();
 	}
@@ -104,11 +94,9 @@ public class AbstractIntegrationTest
 	 * @throws Exception
 	 */
 	@Before
-	public void setUp() throws Exception
-	{
+	public void setUp() throws Exception {
 		IDatabaseConnection connection = null;
-		try
-		{
+		try {
 			connection = getConnection();
 			IDataSet dataSet = getDataSet();
 			// The FilteredDataSet and the SequenceTableFilter is used to
@@ -117,28 +105,28 @@ public class AbstractIntegrationTest
 			// between the ALBUMS and PHOTOS tables. The plain XML file does not
 			// contain this information. The DatabaseSequenceFilter class is
 			// avoided as it cannot handle circular dependencies.
-			String[] orderedTableNames = new String[] { "SEQUENCE", "USERS_GROUPS", "USERS", "GROUPS", "ALBUMS", "PHOTOS" };
-			IDataSet filteredDataSet = new FilteredDataSet(new SequenceTableFilter(orderedTableNames), dataSet);
+			String[] orderedTableNames = new String[] { "SEQUENCE",
+					"USERS_GROUPS", "USERS", "GROUPS", "ALBUMS", "PHOTOS" };
+			IDataSet filteredDataSet = new FilteredDataSet(
+					new SequenceTableFilter(orderedTableNames), dataSet);
 			DatabaseOperation.CLEAN_INSERT.execute(connection, filteredDataSet);
-		}
-		finally
-		{
+		} finally {
 			connection.close();
 		}
 	}
 
 	@After
-	public void tearDown() throws Exception
-	{
+	public void tearDown() throws Exception {
 
 	}
 
-	private IDatabaseConnection getConnection() throws ClassNotFoundException, SQLException, DatabaseUnitException
-	{
+	private IDatabaseConnection getConnection() throws ClassNotFoundException,
+			SQLException, DatabaseUnitException {
 		Class.forName("org.apache.derby.jdbc.ClientDriver");
-		Connection jdbcConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/JAVAEEEXAMPLE", "APP",
-				"APP");
-		IDatabaseConnection databaseConnection = new DatabaseConnection(jdbcConnection);
+		Connection jdbcConnection = DriverManager.getConnection(
+				"jdbc:derby://localhost:1527/JAVAEEEXAMPLE", "APP", "APP");
+		IDatabaseConnection databaseConnection = new DatabaseConnection(
+				jdbcConnection);
 		return databaseConnection;
 	}
 
@@ -149,9 +137,9 @@ public class AbstractIntegrationTest
 	 * @return
 	 * @throws Exception
 	 */
-	private IDataSet getDataSet() throws Exception
-	{
+	private IDataSet getDataSet() throws Exception {
 		ClassLoader classLoader = this.getClass().getClassLoader();
-		return new FlatXmlDataSetBuilder().build(classLoader.getResourceAsStream("database-test-setup.xml"));
+		return new FlatXmlDataSetBuilder().build(classLoader
+				.getResourceAsStream("database-test-setup.xml"));
 	}
 }

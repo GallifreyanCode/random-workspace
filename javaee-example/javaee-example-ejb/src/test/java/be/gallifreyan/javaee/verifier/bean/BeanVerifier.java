@@ -6,14 +6,13 @@ import static org.mockito.Mockito.mock;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.*;
 
-
 import org.slf4j.*;
 
 import be.gallifreyan.javaee.verifier.factory.*;
 
-public class BeanVerifier<T>
-{
-	private static final Logger logger = LoggerFactory.getLogger(BeanVerifier.class);
+public class BeanVerifier<T> {
+	private static final Logger logger = LoggerFactory
+			.getLogger(BeanVerifier.class);
 	private static final int MOCK_ARRAY_SIZE = 1000;
 
 	private Class<T> type;
@@ -23,16 +22,13 @@ public class BeanVerifier<T>
 
 	private PropertyDescriptor descriptor;
 
-	private BeanVerifier(Class<T> type, PropertyDescriptor descriptor, ITypeFactory mockFactory)
-	{
+	private BeanVerifier(Class<T> type, PropertyDescriptor descriptor,
+			ITypeFactory mockFactory) {
 		this.type = type;
 		this.descriptor = descriptor;
-		if (mockFactory == null)
-		{
+		if (mockFactory == null) {
 			this.typeFactory = new NullTypeFactory();
-		}
-		else
-		{
+		} else {
 			this.typeFactory = mockFactory;
 		}
 		this.primitiveTypeFactory = new PrimitiveTypeFactory();
@@ -50,8 +46,8 @@ public class BeanVerifier<T>
 	 *            The factory to be used to create instances of bean properties.
 	 * @return A new BeanVerifier instance
 	 */
-	public static <T> BeanVerifier<T> forProperty(Class<T> type, PropertyDescriptor descriptor, ITypeFactory typeFactory)
-	{
+	public static <T> BeanVerifier<T> forProperty(Class<T> type,
+			PropertyDescriptor descriptor, ITypeFactory typeFactory) {
 		return new BeanVerifier<T>(type, descriptor, typeFactory);
 	}
 
@@ -62,33 +58,28 @@ public class BeanVerifier<T>
 	 * instances of parameters and verifies that the associated getter method
 	 * will return the created mock instance.
 	 */
-	public void verify()
-	{
-		try
-		{
+	public void verify() {
+		try {
 			Class<?> propertyType = descriptor.getPropertyType();
 			// delegate first to the provided type factory to create a type
 			// instance
 			Object propertyInstance = typeFactory.create(propertyType);
-			if (propertyInstance == null)
-			{
+			if (propertyInstance == null) {
 				propertyInstance = createInstanceOfType(propertyType);
 			}
-			if (propertyInstance == null)
-			{
+			if (propertyInstance == null) {
 				// Use Mockito to mock the property
 				// TODO Use the Reflection API's Proxy instead
 				propertyInstance = mock(propertyType);
 			}
-			if (propertyInstance == null)
-			{
-				fail("Failed to create a mock object of type" + propertyType.getName());
+			if (propertyInstance == null) {
+				fail("Failed to create a mock object of type"
+						+ propertyType.getName());
 			}
 
 			// Setup
 			Object system = typeFactory.create(type);
-			if (system == null)
-			{
+			if (system == null) {
 				system = type.newInstance();
 			}
 
@@ -99,21 +90,15 @@ public class BeanVerifier<T>
 			Object actualObject = readMethod.invoke(system, (Object[]) null);
 
 			// Verify
-			assertEquals(String.format("Verification failed for property %s", descriptor.getName()), propertyInstance,
-					actualObject);
-		}
-		catch (IllegalAccessException illegalEx)
-		{
+			assertEquals(String.format("Verification failed for property %s",
+					descriptor.getName()), propertyInstance, actualObject);
+		} catch (IllegalAccessException illegalEx) {
 			logger.error(null, illegalEx);
 			fail("Verification failed for property:" + descriptor.getName());
-		}
-		catch (InstantiationException instanceEx)
-		{
+		} catch (InstantiationException instanceEx) {
 			logger.error(null, instanceEx);
 			fail("Verification failed for property:" + descriptor.getName());
-		}
-		catch (InvocationTargetException invokeEx)
-		{
+		} catch (InvocationTargetException invokeEx) {
 			logger.error(null, invokeEx);
 			fail("Verification failed for property:" + descriptor.getName());
 		}
@@ -127,19 +112,13 @@ public class BeanVerifier<T>
 	 *            The type of the class whose instance needs to be created.
 	 * @return An instance of the type
 	 */
-	private Object createInstanceOfType(Class<?> propertyType)
-	{
+	private Object createInstanceOfType(Class<?> propertyType) {
 		Object typeInstance = null;
-		if (propertyType.isArray())
-		{
+		if (propertyType.isArray()) {
 			typeInstance = createArray(propertyType);
-		}
-		else if (propertyType.isPrimitive())
-		{
+		} else if (propertyType.isPrimitive()) {
 			typeInstance = primitiveTypeFactory.create(propertyType);
-		}
-		else
-		{
+		} else {
 			typeInstance = knownTypeFactory.create(propertyType);
 		}
 		return typeInstance;
@@ -153,14 +132,12 @@ public class BeanVerifier<T>
 	 *            The class representing the array type
 	 * @return The mock array
 	 */
-	private Object createArray(Class<?> clazz)
-	{
+	private Object createArray(Class<?> clazz) {
 		Object mockValue;
 		Class<?> componentType = clazz.getComponentType();
 		mockValue = createInstanceOfType(componentType);
 		Object array = Array.newInstance(componentType, MOCK_ARRAY_SIZE);
-		for (int ctr = 0; ctr < MOCK_ARRAY_SIZE; ctr++)
-		{
+		for (int ctr = 0; ctr < MOCK_ARRAY_SIZE; ctr++) {
 			Array.set(array, ctr, mockValue);
 		}
 		mockValue = array;

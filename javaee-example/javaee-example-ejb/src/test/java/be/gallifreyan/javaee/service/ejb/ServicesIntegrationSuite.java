@@ -17,10 +17,10 @@ import org.junit.runners.Suite.SuiteClasses;
  * 
  */
 @RunWith(Suite.class)
-@SuiteClasses({ AlbumServiceIntegrationTest.class, GroupServiceIntegrationTest.class,
-		PhotoServiceIntegrationTest.class, UserServiceIntegrationTest.class })
-public class ServicesIntegrationSuite
-{
+@SuiteClasses({ AlbumServiceIntegrationTest.class,
+		GroupServiceIntegrationTest.class, PhotoServiceIntegrationTest.class,
+		UserServiceIntegrationTest.class })
+public class ServicesIntegrationSuite {
 
 	/**
 	 * Starts the embedded container before running the tests in the suite.
@@ -28,8 +28,7 @@ public class ServicesIntegrationSuite
 	 * @throws Exception
 	 */
 	@BeforeClass
-	public static void beforeSuite() throws Exception
-	{
+	public static void beforeSuite() throws Exception {
 		AbstractIntegrationTest.isRunFromSuite = true;
 		AbstractIntegrationTest.startup();
 	}
@@ -39,8 +38,7 @@ public class ServicesIntegrationSuite
 	 * suite.
 	 */
 	@AfterClass
-	public static void afterSuite()
-	{
+	public static void afterSuite() {
 		AbstractIntegrationTest.shutdown();
 		AbstractIntegrationTest.isRunFromSuite = false;
 	}

@@ -19,9 +19,9 @@ import static org.junit.Assert.*;
 import org.junit.rules.TestName;
 import org.slf4j.*;
 
-public class AbstractRepositoryTest
-{
-	private static final Logger logger = LoggerFactory.getLogger(AbstractRepositoryTest.class);
+public class AbstractRepositoryTest {
+	private static final Logger logger = LoggerFactory
+			.getLogger(AbstractRepositoryTest.class);
 
 	@Rule
 	public TestName testName = new TestName();
@@ -29,24 +29,22 @@ public class AbstractRepositoryTest
 	protected EntityManager em;
 
 	@BeforeClass
-	public static void beforeClass()
-	{
-		logger.info("Running the beforeClass method of {}", AbstractRepositoryTest.class);
+	public static void beforeClass() {
+		logger.info("Running the beforeClass method of {}",
+				AbstractRepositoryTest.class);
 		emf = Persistence.createEntityManagerFactory("javaee-example-ejb");
 	}
 
 	@AfterClass
-	public static void afterClass()
-	{
-		logger.info("Running the afterClass method of {}", AbstractRepositoryTest.class);
-		if (emf != null)
-		{
+	public static void afterClass() {
+		logger.info("Running the afterClass method of {}",
+				AbstractRepositoryTest.class);
+		if (emf != null) {
 			emf.close();
 		}
 	}
 
-	public AbstractRepositoryTest()
-	{
+	public AbstractRepositoryTest() {
 		super();
 	}
 
@@ -58,12 +56,10 @@ public class AbstractRepositoryTest
 	 * @throws Exception
 	 */
 	@Before
-	public void setUp() throws Exception
-	{
+	public void setUp() throws Exception {
 		logger.info("Performing the setup of test {}", testName.getMethodName());
 		IDatabaseConnection connection = null;
-		try
-		{
+		try {
 			connection = getConnection();
 			assertNotNull(connection);
 			IDataSet dataSet = getDataSet();
@@ -73,16 +69,16 @@ public class AbstractRepositoryTest
 			// between the ALBUMS and PHOTOS tables. The plain XML file does not
 			// contain this information. The DatabaseSequenceFilter class is
 			// avoided as it cannot handle circular dependencies.
-			String[] orderedTableNames = new String[] { "SEQUENCE", "USERS_GROUPS", "USERS", "GROUPS", "ALBUMS", "PHOTOS" };
-			IDataSet filteredDataSet = new FilteredDataSet(new SequenceTableFilter(orderedTableNames), dataSet);
+			String[] orderedTableNames = new String[] { "SEQUENCE",
+					"USERS_GROUPS", "USERS", "GROUPS", "ALBUMS", "PHOTOS" };
+			IDataSet filteredDataSet = new FilteredDataSet(
+					new SequenceTableFilter(orderedTableNames), dataSet);
 			DatabaseOperation.CLEAN_INSERT.execute(connection, filteredDataSet);
-		}
-		finally
-		{
-			if(connection != null){
+		} finally {
+			if (connection != null) {
 				assertNotNull(connection);
 				connection.close();
-			}			
+			}
 		}
 
 		em = emf.createEntityManager();
@@ -96,23 +92,23 @@ public class AbstractRepositoryTest
 	 * @throws Exception
 	 */
 	@After
-	public void tearDown() throws Exception
-	{
-		logger.info("Performing the teardown of test {}", testName.getMethodName());
-		if (em != null)
-		{
+	public void tearDown() throws Exception {
+		logger.info("Performing the teardown of test {}",
+				testName.getMethodName());
+		if (em != null) {
 			em.getTransaction().rollback();
 			em.close();
 		}
 	}
 
-	private IDatabaseConnection getConnection() throws ClassNotFoundException, SQLException, DatabaseUnitException
-	{
+	private IDatabaseConnection getConnection() throws ClassNotFoundException,
+			SQLException, DatabaseUnitException {
 		@SuppressWarnings({ "rawtypes", "unused" })
 		Class driverClass = Class.forName("org.apache.derby.jdbc.ClientDriver");
-		Connection jdbcConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/JAVAEEEXAMPLE", "APP",
-				"APP");
-		IDatabaseConnection databaseConnection = new DatabaseConnection(jdbcConnection);
+		Connection jdbcConnection = DriverManager.getConnection(
+				"jdbc:derby://localhost:1527/JAVAEEEXAMPLE", "APP", "APP");
+		IDatabaseConnection databaseConnection = new DatabaseConnection(
+				jdbcConnection);
 		return databaseConnection;
 	}
 
@@ -123,10 +119,9 @@ public class AbstractRepositoryTest
 	 * @return
 	 * @throws Exception
 	 */
-	private IDataSet getDataSet() throws Exception
-	{
+	private IDataSet getDataSet() throws Exception {
 		ClassLoader classLoader = this.getClass().getClassLoader();
-		return new FlatXmlDataSetBuilder().build(classLoader.getResourceAsStream("database-test-setup.xml"));
+		return new FlatXmlDataSetBuilder().build(classLoader
+				.getResourceAsStream("database-test-setup.xml"));
 	}
-
 }

@@ -15,13 +15,14 @@ import be.gallifreyan.javaee.entity.*;
 
 import com.sun.appserv.security.ProgrammaticLogin;
 
-public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
-{
-	private static final Logger logger = LoggerFactory.getLogger(PhotoServiceIntegrationTest.class);
+public class PhotoServiceIntegrationTest extends AbstractIntegrationTest {
+	private static final Logger logger = LoggerFactory
+			.getLogger(PhotoServiceIntegrationTest.class);
 
 	static final String TEST_FILE_NAME = "Photo-1.ext";
 
-	static final byte[] TEST_FILE_CONTENT = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	static final byte[] TEST_FILE_CONTENT = new byte[] { 0, 1, 2, 3, 4, 5, 6,
+			7, 8, 9 };
 
 	static final String TEST_PHOTO_TITLE = "Photo #1";
 
@@ -38,27 +39,29 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 	private Album album;
 
 	@BeforeClass
-	public static void beforeClass() throws Exception
-	{
-		logger.info("Entering beforeClass method of {}", PhotoServiceIntegrationTest.class);
+	public static void beforeClass() throws Exception {
+		logger.info("Entering beforeClass method of {}",
+				PhotoServiceIntegrationTest.class);
 		AbstractIntegrationTest.setUpBeforeClass();
 	}
 
 	@AfterClass
-	public static void afterClass() throws Exception
-	{
-		logger.info("Entering afterClass method of {}", PhotoServiceIntegrationTest.class);
+	public static void afterClass() throws Exception {
+		logger.info("Entering afterClass method of {}",
+				PhotoServiceIntegrationTest.class);
 		AbstractIntegrationTest.tearDownAfterClass();
 	}
 
 	@Override
-	public void setUp() throws Exception
-	{
+	public void setUp() throws Exception {
 		logger.info("Entering setUp of method {}", testMethod.getMethodName());
 		super.setUp();
-		userService = (UserService) context.lookup("java:global/javaee-example/javaee-example-ejb/UserService");
-		albumService = (AlbumService) context.lookup("java:global/javaee-example/javaee-example-ejb/AlbumService");
-		photoService = (PhotoService) context.lookup("java:global/javaee-example/javaee-example-ejb/PhotoService");
+		userService = (UserService) context
+				.lookup("java:global/javaee-example/javaee-example-ejb/UserService");
+		albumService = (AlbumService) context
+				.lookup("java:global/javaee-example/javaee-example-ejb/AlbumService");
+		photoService = (PhotoService) context
+				.lookup("java:global/javaee-example/javaee-example-ejb/PhotoService");
 
 		user = new User(TEST_USER_ID, TEST_PASSWORD);
 		userService.signupUser(user);
@@ -70,16 +73,16 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 	}
 
 	@Override
-	public void tearDown() throws Exception
-	{
-		logger.info("Entering tearDown of method {}", testMethod.getMethodName());
+	public void tearDown() throws Exception {
+		logger.info("Entering tearDown of method {}",
+				testMethod.getMethodName());
 		super.tearDown();
 	}
 
 	@Test
-	public void testCreatePhoto() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testCreatePhoto() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		Photo uploadedPhoto = photoService.uploadPhoto(photo, album);
@@ -88,50 +91,54 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		assertEquals(photo, uploadedPhoto);
 		assertEquals(album, uploadedPhoto.getAlbum());
 
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test(expected = PhotoException.class)
-	public void testCreatePhotoNullValues() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testCreatePhotoNullValues() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(null, null);
 		photoService.uploadPhoto(photo, album);
 
 		fail("The execution control flow must not arrive here.");
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test(expected = PhotoException.class)
-	public void testCreatePhotoEmptyValues() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testCreatePhotoEmptyValues() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo("", new byte[] {});
 		photoService.uploadPhoto(photo, album);
 
 		fail("The execution control flow must not arrive here.");
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test(expected = PhotoException.class)
-	public void testCreateDuplicatePhoto() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testCreateDuplicatePhoto() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		photoService.uploadPhoto(photo, album);
 		photoService.uploadPhoto(photo, album);
 
 		fail("The execution control flow must not arrive here.");
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test(expected = PhotoException.class)
-	public void testCreatePhotoInUnownedAlbum() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testCreatePhotoInUnownedAlbum() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		String anotherUserId = "User#2";
 		char[] anotherUserPassword = "PASSWORD".toCharArray();
@@ -144,13 +151,14 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		photoService.uploadPhoto(photo, album);
 
 		fail("The execution control flow must not arrive here.");
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test
-	public void testModifyPhoto() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testModifyPhoto() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		Photo uploadedPhoto = photoService.uploadPhoto(photo, album);
@@ -163,13 +171,14 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		assertEquals(uploadedPhoto, modifiedPhoto);
 		assertEquals(album, modifiedPhoto.getAlbum());
 
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test(expected = PhotoException.class)
-	public void testModifyPhotoNullValues() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testModifyPhotoNullValues() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		Photo uploadedPhoto = photoService.uploadPhoto(photo, album);
@@ -179,13 +188,14 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		photoService.modifyPhoto(uploadedPhoto);
 
 		fail("The execution control flow must not arrive here.");
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test(expected = PhotoException.class)
-	public void testModifyUnownedPhoto() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testModifyUnownedPhoto() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		Photo uploadedPhoto = photoService.uploadPhoto(photo, album);
@@ -202,13 +212,14 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		photoService.modifyPhoto(uploadedPhoto);
 
 		fail("The execution control flow must not arrive here.");
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test
-	public void testDeletePhoto() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testDeletePhoto() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		Photo uploadedPhoto = photoService.uploadPhoto(photo, album);
@@ -217,25 +228,24 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		photoService.deletePhoto(uploadedPhoto);
 
 		Connection connection = datasource.getConnection();
-		PreparedStatement pStmt = connection.prepareStatement("SELECT COUNT(1) FROM PHOTOS WHERE PHOTOID= ?");
+		PreparedStatement pStmt = connection
+				.prepareStatement("SELECT COUNT(1) FROM PHOTOS WHERE PHOTOID= ?");
 		pStmt.setLong(1, photoId);
 		ResultSet rs = pStmt.executeQuery();
-		if (rs.next())
-		{
+		if (rs.next()) {
 			int photoCount = rs.getInt(1);
 			assertEquals(0, photoCount);
-		}
-		else
-		{
+		} else {
 			fail("The query did not execute successfully.");
 		}
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test
-	public void testDeleteUnownedPhoto() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testDeleteUnownedPhoto() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		Photo uploadedPhoto = photoService.uploadPhoto(photo, album);
@@ -249,42 +259,35 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		login.login(anotherUserId, anotherUserPassword, "JavaEERealm", true);
 
 		boolean isExceptionThrown = false;
-		try
-		{
+		try {
 			photoService.deletePhoto(uploadedPhoto);
-		}
-		catch (PhotoException photoEx)
-		{
+		} catch (PhotoException photoEx) {
 			isExceptionThrown = true;
-		}
-		finally
-		{
-			if (!isExceptionThrown)
-			{
+		} finally {
+			if (!isExceptionThrown) {
 				fail("No exception was encountered during the deletion of the photo.");
 			}
 		}
 
 		Connection connection = datasource.getConnection();
-		PreparedStatement pStmt = connection.prepareStatement("SELECT COUNT(1) FROM PHOTOS WHERE PHOTOID= ?");
+		PreparedStatement pStmt = connection
+				.prepareStatement("SELECT COUNT(1) FROM PHOTOS WHERE PHOTOID= ?");
 		pStmt.setLong(1, photoId);
 		ResultSet rs = pStmt.executeQuery();
-		if (rs.next())
-		{
+		if (rs.next()) {
 			int photoCount = rs.getInt(1);
 			assertEquals(1, photoCount);
-		}
-		else
-		{
+		} else {
 			fail("The query did not execute successfully.");
 		}
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test
-	public void testFindPhotoByIdWithoutContent() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testFindPhotoByIdWithoutContent() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		Photo uploadedPhoto = photoService.uploadPhoto(photo, album);
@@ -295,13 +298,14 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		assertNotNull(foundPhoto);
 		assertEquals(uploadedPhoto.getFileName(), foundPhoto.getFileName());
 
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test
-	public void testFindPhotoByIdWithContent() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testFindPhotoByIdWithContent() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		Photo uploadedPhoto = photoService.uploadPhoto(photo, album);
@@ -313,13 +317,14 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		assertEquals(uploadedPhoto, foundPhoto);
 		assertArrayEquals(TEST_FILE_CONTENT, foundPhoto.getFile());
 
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test(expected = PhotoException.class)
-	public void testFindUnownedPhotoById() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testFindUnownedPhotoById() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		Photo uploadedPhoto = photoService.uploadPhoto(photo, album);
@@ -335,13 +340,14 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		photoService.findPhotoById(photoId, true);
 
 		fail("The execution control flow must not arrive here.");
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test
-	public void testFindPhotosByAlbum() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testFindPhotosByAlbum() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		Photo uploadedPhoto = photoService.uploadPhoto(photo, album);
@@ -351,13 +357,14 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		assertNotNull(foundPhotos);
 		assertTrue(foundPhotos.contains(uploadedPhoto));
 
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test(expected = PhotoException.class)
-	public void testFindPhotosForInvalidAlbum() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testFindPhotosForInvalidAlbum() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		photoService.uploadPhoto(photo, album);
@@ -367,13 +374,14 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		photoService.findPhotosByAlbum(invalidAlbum);
 
 		fail("The execution control flow must not arrive here.");
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test
-	public void testSetAlbumCover() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testSetAlbumCover() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		photo = photoService.uploadPhoto(photo, album);
@@ -384,13 +392,14 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 
 		Album foundAlbum = albumService.findAlbumById(album.getAlbumId());
 		assertThat(foundAlbum.getCoverPhoto(), equalTo(secondPhoto));
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test(expected = PhotoException.class)
-	public void testUnownedPhotoAsAlbumCover() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testUnownedPhotoAsAlbumCover() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		photo = photoService.uploadPhoto(photo, album);
@@ -407,13 +416,14 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		photoService.setAlbumCover(secondPhoto);
 
 		fail("The execution control flow must not arrive here.");
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
 
 	@Test(expected = PhotoException.class)
-	public void testPhotoFromAnotherAlbumAsCover() throws Exception
-	{
-		logger.info("About to execute test method {}", testMethod.getMethodName());
+	public void testPhotoFromAnotherAlbumAsCover() throws Exception {
+		logger.info("About to execute test method {}",
+				testMethod.getMethodName());
 
 		Photo photo = new Photo(TEST_FILE_NAME, TEST_FILE_CONTENT);
 		photo = photoService.uploadPhoto(photo, album);
@@ -426,7 +436,7 @@ public class PhotoServiceIntegrationTest extends AbstractIntegrationTest
 		photoService.setAlbumCover(secondPhoto);
 
 		fail("The execution control flow must not arrive here.");
-		logger.info("Finished executing test method {}", testMethod.getMethodName());
+		logger.info("Finished executing test method {}",
+				testMethod.getMethodName());
 	}
-
 }
