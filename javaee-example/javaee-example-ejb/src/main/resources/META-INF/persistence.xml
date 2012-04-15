@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="javaee-example-ejb" transaction-type="JTA">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>jdbc/javaeeDS</jta-data-source>
+		<class>be.gallifreyan.javaee.entity.User</class>
+		<class>be.gallifreyan.javaee.entity.Group</class>
+		<class>be.gallifreyan.javaee.entity.Album</class>
+		<class>be.gallifreyan.javaee.entity.Photo</class>
+		<properties>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="javax.persistence.validation.group.pre-persist" value="be.gallifreyan.javaee.entity.PersistenceConstraint"/>
+			<property name="javax.persistence.validation.group.pre-update" value="be.gallifreyan.javaee.entity.PersistenceConstraint"/>
+		</properties>
+	</persistence-unit>
+</persistence>

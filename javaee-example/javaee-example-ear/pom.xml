@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>be.gallifreyan.javaee</groupId>
+		<artifactId>javaee-example</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>be.gallifreyan.javaee</groupId>
+	<artifactId>javaee-example-ear</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	
+	<properties>
+		<ear.plugin.version>2.7</ear.plugin.version>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>javaee-example-ejb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>javaee-example-war</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>${ear.plugin.version}</version>
+				<configuration>
+					<version>6</version>
+					<modules>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>javaee-example-ejb</artifactId>
+						</ejbModule>
+						<webModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>javaee-example-war</artifactId>
+							<contextRoot>/javaee</contextRoot>
+						</webModule>
+<!-- 						<jarModule> -->
+<!-- 							<groupId>commons-codec</groupId> -->
+<!-- 							<artifactId>commons-codec</artifactId> -->
+<!-- 							<bundleDir>/lib</bundleDir> -->
+<!-- 						</jarModule> -->
+					</modules>
+				</configuration>
+			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.glassfish.maven.plugin</groupId> -->
+<!-- 				<artifactId>maven-glassfish-plugin</artifactId> -->
+<!-- 				<version>2.1</version> -->
+<!-- 				<configuration> -->
+<!-- 					<user>${galleria.glassfish.productionDomain.user}</user> -->
+<!-- 					<passwordFile>${galleria.glassfish.productionDomain.passwordFile}</passwordFile> -->
+<!-- 					<glassfishDirectory>${galleria.glassfish.productionDomain.glassfishDirectory}</glassfishDirectory> -->
+<!-- 					<components> -->
+<!-- 						<component> -->
+<!-- 							<name>${project.artifactId}</name> -->
+<!-- 							<artifact>${project.build.directory}/${project.build.finalName}.ear</artifact> -->
+<!-- 						</component> -->
+<!-- 					</components> -->
+<!-- 					<domain> -->
+<!-- 						<name>${galleria.glassfish.productionDomain.domainName}</name> -->
+<!-- 						<adminPort>${galleria.glassfish.productionDomain.adminPort}</adminPort> -->
+<!-- 						<httpPort>${galleria.glassfish.productionDomain.httpPort}</httpPort> -->
+<!-- 						<httpsPort>${galleria.glassfish.productionDomain.httpsPort}</httpsPort> -->
+<!-- 					</domain> -->
+<!-- 					<debug>true</debug> -->
+<!-- 					<echo>true</echo> -->
+<!-- 					<terse>false</terse> -->
+<!-- 					<autoCreate>false</autoCreate> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
+		</plugins>
+	</build>
+</project>

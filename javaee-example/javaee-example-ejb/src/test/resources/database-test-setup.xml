@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <USERS/>
+  <ALBUMS/>
+  <PHOTOS/>
+  <GROUPS/>
+  <USERS_GROUPS/>
+  <SEQUENCE SEQ_NAME="ALBUMS_SEQ" SEQ_COUNT="0"/>
+  <SEQUENCE SEQ_NAME="PHOTOS_SEQ" SEQ_COUNT="0"/>
+</dataset>
