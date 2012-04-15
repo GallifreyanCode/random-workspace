@@ -1,1 +1,1 @@
-mvn integration-test
+    mvn integration-test
