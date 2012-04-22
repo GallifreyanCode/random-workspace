@@ -1,0 +1,58 @@
+<ui:composition template="/templates/privateLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<ui:define name="title">
+		<h:outputText value="#{msg['Application.title']}" />
+	</ui:define>
+
+	<ui:define name="content">
+		<div class="mainpane">
+			<h:form id="viewAllAlbums">
+				<p:dataGrid id="albumGrid" value="#{albumManager.ownedAlbums}" rendered="#{albumManager.ownedAlbums.size() > 0}"
+					var="album" columns="3" rows="6" paginator="true">
+					<p:column>
+						<p:panel styleClass="panelWrapper"> 
+							<h:panelGrid columns="1" styleClass="photoPanel">
+								<h:panelGroup>
+									<ul class="photoWrapper">
+										<li class="photolink">
+											<h:outputLink value="album/ViewAlbum.xhtml">
+												<f:param name="albumId" value="#{album.albumId}" />
+												<p:graphicImage id="photo" value="#{photoStreamer.fileContent}">
+													<f:param id="photo_id" name="photo_id" value="#{album.coverPhoto.photoId}" />
+												</p:graphicImage>
+											</h:outputLink>
+										</li>
+										<li class="name">
+											<h:outputText value="#{album.name}" />
+										</li>
+										<li class="description">
+											<h:outputText value="#{album.description}" />
+										</li>
+									</ul>
+								</h:panelGroup>
+							</h:panelGrid>
+						</p:panel>
+					</p:column>
+				</p:dataGrid>
+			</h:form>
+			<h:messages id="messages" globalOnly="true" infoClass="infoStyle"
+				warnClass="warnStyle" errorClass="errorStyle" />
+		</div>
+		<div class="actionpane">
+			<p>
+				<h:outputLink id="CreateAlbum" value="album/CreateAlbum.xhtml">
+					<h:outputText value="#{msg['Application.CreateAlbum.label']}" />
+				</h:outputLink>
+			</p>
+			<p>
+				<h:outputLink id="Upload" value="photo/UploadPhoto.xhtml">
+					<h:outputText value="#{msg['Application.Upload.label']}" />
+				</h:outputLink>
+			</p>
+		</div>
+	</ui:define>
+</ui:composition>

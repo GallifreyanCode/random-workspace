@@ -1,0 +1,36 @@
+<ui:composition template="/templates/privateLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="title">
+		<h:outputText value="#{msg['EditAlbum.title']}" />
+	</ui:define>
+	<ui:define name="content">
+		<f:metadata>
+			<f:viewParam id="albumId" name="albumId" immediate="true" required="true" value="#{albumManager.currentAlbumId}" />
+		</f:metadata>
+		<div class="fullpane">
+		    <h:form id="editAlbumForm" styleClass="form">
+		    	<ul>
+		    		<li>
+			    		<h:outputLabel value="#{msg['EditAlbum.albumName.label']}" for="albumName" />
+			    		<h:inputText id="albumName" value="#{albumManager.editRequest.name}" />
+			    	</li>
+			    	<li>
+			    		<h:outputLabel value="#{msg['EditAlbum.albumDescription.label']}" for="albumDescription" />
+			    		<h:inputText id="albumDescription" value="#{albumManager.editRequest.description}" />
+			    	</li>
+			    	<li>
+			    		<h:commandButton id="editAlbumButton" action="#{albumManager.editAlbum}" value="#{msg['EditAlbum.editAlbumButton.label']}" styleClass="submit" />
+			    		<h:outputLink id="cancel" value="ViewAlbum.xhtml?albumId=#{albumManager.currentAlbumId}" >
+			    			<h:outputText value="#{msg['EditAlbum.cancel.label']}" />
+			    		</h:outputLink>
+			    	</li>
+		    	</ul>
+		    </h:form>
+		    <h:messages id="messages" showSummary="true" showDetail="false" infoClass="infoStyle"
+				warnClass="warnStyle" errorClass="errorStyle" />
+		</div>
+	</ui:define>
+</ui:composition>

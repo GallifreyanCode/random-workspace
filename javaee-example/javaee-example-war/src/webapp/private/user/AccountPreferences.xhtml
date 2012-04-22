@@ -1,0 +1,54 @@
+<ui:composition template="/templates/privateLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="title">
+		<h:outputText value="#{msg['AccountPreferences.title']}"></h:outputText>
+	</ui:define>
+	<ui:define name="content">
+		<div class="fullpane">
+			<h:form id="modifyPasswordForm" styleClass="form">
+				<ul>
+					<li>
+						<h:outputLabel for="oldPassword"
+							value="#{msg['AccountPreferences.oldPassword.label']}" />
+						<h:inputSecret id="oldPassword"
+							value="#{userManager.modifyPasswordRequest.oldPassword}"
+							converter="Char[]Converter" />
+					</li>
+					<li>
+						<h:outputLabel for="newPassword"
+							value="#{msg['AccountPreferences.newPassword.label']}" />
+						<h:inputSecret id="newPassword"
+							value="#{userManager.modifyPasswordRequest.newPassword}"
+							converter="Char[]Converter" />
+					</li>
+					<li>
+						<h:outputLabel for="confirmNewPassword"
+							value="#{msg['AccountPreferences.confirmNewPassword.label']}" />
+						<h:inputSecret id="confirmNewPassword"
+							value="#{userManager.modifyPasswordRequest.confirmNewPassword}"
+							converter="Char[]Converter" />
+					</li>
+					<li>
+						<h:commandButton id="modifyPassword"
+							value="#{msg['AccountPreferences.modifyPassword.label']}"
+							action="#{userManager.modifyPassword}" styleClass="submit" />
+					</li>
+				</ul>
+			</h:form>
+			<h:messages id="messages" globalOnly="true" infoClass="infoStyle"
+				warnClass="warnStyle" errorClass="errorStyle" />
+			<h:form id="deleteAccountForm" styleClass="form">
+				<ul>
+					<li>
+						<h:commandButton id="deleteAccount"
+							value="#{msg['AccountPreferences.deleteAccount.label']}"
+							action="#{userManager.deleteAccount}" styleClass="submit" />
+					</li>
+				</ul>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

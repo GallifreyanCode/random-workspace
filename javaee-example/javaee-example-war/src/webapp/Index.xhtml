@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/templates/defaultLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="title">
+		<h:outputText value="#{msg['Index.title']}" />
+	</ui:define>
+	<ui:define name="content">
+		<div id="welcome">
+			<h3>
+				<h:outputText value="#{msg['Index.heading']}" />
+			</h3>
+			<p>
+				<h:outputText value="#{msg['Index.message']}" />
+			</p>
+			<h:outputLink id="login" value="Login.xhtml">
+				<h:outputText value="#{msg['Index.login.message']}" />
+			</h:outputLink>
+			<h:outputText value="#{msg['Index.orMessage']}" />
+			<h:outputLink id="signup" value="Signup.xhtml">
+				<h:outputText value="#{msg['Index.signup.message']}" />
+			</h:outputLink>
+			<h:messages id="messages" globalOnly="true" infoClass="infoStyle"
+				warnClass="warnStyle" errorClass="errorStyle" />
+		</div>
+	</ui:define>
+</ui:composition>

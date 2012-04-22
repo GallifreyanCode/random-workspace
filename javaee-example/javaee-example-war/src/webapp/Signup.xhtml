@@ -1,0 +1,35 @@
+<ui:composition template="/templates/defaultLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="title">
+		<h:outputText value="#{msg['Signup.title']}" />
+	</ui:define>
+	<ui:define name="content">
+		<h3>
+			<h:outputText value="#{msg['Signup.message']}" />
+		</h3>
+		<h:form id="signupForm" acceptcharset="UTF-8" styleClass="form">
+			<ul>
+				<li>
+					<h:outputLabel for="userId" value="#{msg['Signup.emailId.label']}" />
+					<h:inputText id="userId" value="#{userManager.signupRequest.userId}" />
+				</li>
+				<li>
+					<h:outputLabel for="password" value="#{msg['Signup.password.label']}" />
+					<h:inputSecret id="password" value="#{userManager.signupRequest.password}" converter="Char[]Converter" />
+				</li>
+				<li>
+					<h:outputLabel for="confirmPassword" value="#{msg['Signup.confirmPassword.label']}" />
+					<h:inputSecret id="confirmPassword"	value="#{userManager.signupRequest.confirmPassword}" converter="Char[]Converter" />
+				</li>
+				<li>
+					<h:commandButton id="submit" value="#{msg['Signup.submit.label']}" action="#{userManager.signupUser}" styleClass="submit" />
+				</li>
+			</ul>
+		</h:form>
+		<h:messages id="messages" showSummary="true" showDetail="false" infoClass="infoStyle"
+			warnClass="warnStyle" errorClass="errorStyle" />
+	</ui:define>
+</ui:composition>

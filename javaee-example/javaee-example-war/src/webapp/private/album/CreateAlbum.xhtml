@@ -1,0 +1,33 @@
+<ui:composition template="/templates/privateLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="title">
+		<h:outputText value="#{msg['CreateAlbum.title']}" />
+	</ui:define>
+	<ui:define name="content">
+		<div class="fullpane">
+			<h:form id="CreateAlbum" styleClass="form">
+				<ul>
+					<li>
+						<h:outputLabel for="albumName" value="#{msg['CreateAlbum.albumName.label']}" />
+						<h:inputText id="albumName" value="#{albumManager.createRequest.name}" />
+					</li>
+					<li>
+						<h:outputLabel for="albumDescription" value="#{msg['CreateAlbum.albumDescription.label']}" />
+						<h:inputText id="albumDescription" value="#{albumManager.createRequest.description}" />
+					</li>
+					<li>
+						<h:commandButton id="createAlbumButton" value="#{msg['CreateAlbum.createAlbumButton.label']}" action="#{albumManager.createAlbum}" styleClass="submit" />
+			    		<h:outputLink id="cancel" value="#{request.contextPath}/private/HomePage.xhtml" >
+			    			<h:outputText value="#{msg['CreateAlbum.cancel.label']}" />
+			    		</h:outputLink>
+					</li>
+				</ul>
+			</h:form>
+			<h:messages id="messages" showSummary="true" showDetail="false" infoClass="infoStyle"
+				warnClass="warnStyle" errorClass="errorStyle" />
+		</div>
+	</ui:define>
+</ui:composition>

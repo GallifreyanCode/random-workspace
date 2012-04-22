@@ -1,0 +1,219 @@
+@CHARSET "UTF-8";
+
+/* Global styles */
+
+* {
+	/* Reset the margin and padding for all elements */
+	margin: 0;
+	padding: 0;
+}
+
+html,body {
+	font: 1em;
+	height: 100%;
+}
+
+/* Styles for the site layout */
+
+.headerBanner {
+	width: 100%;
+	font-size: 36px;
+	line-height: 48px;
+	background-color: grey;
+	color: black;
+}
+
+.headerLinkContent > a {
+	/* Float all links in the header to the right. */
+	float: right;
+	padding-left: 10px;
+}
+
+#publicWrapper {
+	/* The main content should stretch to fit the full window height. Prevents footer from floating upwards.*/
+	height: auto;
+	min-height: 100%;
+}
+
+#wrapper {
+	/* The main content should stretch to fit the full window height. Prevents footer from floating upwards.*/
+	height: auto;
+	min-height: 100%;
+}
+
+#content {
+	clear: right;
+	/* Prevent page content from being overlapped by footer. Matches the footer height. */
+	padding-bottom: 1.5em;
+}
+
+#footer {
+	/* Stretch the footer across the page. */
+	clear: both;
+	width: 100%;
+	position: relative;
+	height: 1.5em;
+	margin-top: -1.5em;
+	background: none repeat-x scroll 0 0 grey;
+}
+
+.footerBanner {
+	background-color: grey;
+	width: 100%;
+	color: black;
+}
+
+/* Styles for all form elements in the application */
+
+.form {
+     padding: 1em;
+}
+
+.form li {
+     clear: left;
+     list-style: none;
+}
+
+.form input, textarea, select {
+     margin: 1em;
+     padding: 0.3em;
+     width: 20em;
+     border: 1px solid #E5E5E5;
+     /*  Commented for now, as this does not work for file upload widgets
+     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.form input:hover, .form textarea:hover,  
+.form input:focus, .form textarea:focus {  
+    border-color: #C9C9C9;  
+}
+
+.submit {
+    width: auto;
+    padding: 0.9em 1.2em;  
+    background: #617798;  
+    border: 0;
+    font-size: 1em;
+    color: #FFFFFF;
+}
+
+.form label {
+     float: left;
+     margin: 1em;
+     padding: 0.3em;
+     width: 15em;
+}
+
+/* Styles for messages displayed throughout the application */
+
+.infoStyle {
+	color:green;
+}
+
+.errorStyle {
+	color:red;
+}
+
+.warnStyle {
+	color:orange;
+}
+
+/* Style for the message on the landing/index page */
+
+#welcome {
+	left: 50%;
+	margin-left: -15em;
+	margin-top: -5em;
+	position: fixed;
+	text-align: center;
+	top: 50%;
+}
+
+/* Style for the link to the home page on the header */
+
+.homepagelink {
+	color: black;
+	text-decoration: none;
+}
+
+/* Style for the photo panels displayed throughout the application. */
+
+.panelWrapper {
+	display: table-cell;
+}
+
+.photoPanel {
+	width: 15em;
+	height: 9em;
+	text-align: center;
+	padding: 0.1em;
+}
+
+.photoPanel .photoWrapper {
+	list-style: none;
+	overflow: hidden;
+	width: 15em;
+}
+
+.photoPanel .photolink {
+	color: #333333;
+	font-size: 1em;
+}
+
+.photoPanel .name {
+	color: #333333;
+	font-size: 1em;
+}
+
+.photoPanel .description {
+	color: #888888;
+	font-size: 0.9em;
+}
+
+.description:before {
+	content: "\0000a0";
+}
+
+.description:after {
+	content: "\0000a0";
+}
+
+.photoPanel img {
+	text-align: center;
+	max-width: 100%;
+	height: 9em;
+}
+
+/* Styles for the actions pane on the right hand side. */
+.actionpane {
+	float: right;
+	width: 20%;
+}
+
+.actionpane p,.actionpane form {
+	padding: 0.5em;
+}
+
+.actionpane .submit {
+	width: 12em;
+}
+
+/* Styles for the main pane on the left hand side. */
+.mainpane {
+	float: left;
+	width: 75%;
+	padding: 5px;
+}
+
+/* Styles for the full pane, that is displayed on pages with no action pane. */
+.fullpane {
+	width: 100%;
+}
+
+/* Styles for the photo pane that is used to display images in the ViewPhoto page. */
+.photopane {
+	width: auto;
+	height: auto;
+	max-height: 70%;
+	max-width: 70%;
+}

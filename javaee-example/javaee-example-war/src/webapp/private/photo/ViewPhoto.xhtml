@@ -1,0 +1,49 @@
+<ui:composition template="/templates/privateLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<ui:define name="title">
+		<h:outputText value="#{msg['ViewPhoto.title']}" />
+	</ui:define>
+	<ui:define name="content">
+	    <f:metadata>
+			<f:viewParam id="photoId" name="photoId" required="true" value="#{photoManager.photoId}" />
+		</f:metadata>
+		<div class="mainpane">
+			<div>
+				<p:graphicImage id="photo" value="#{photoStreamer.fileContent}" styleClass="photopane">
+					<f:param id="photo_id" name="photo_id" value="#{photoManager.photoId}" />
+				</p:graphicImage>
+			</div>
+			<div>
+				<h:outputText value="#{photoManager.photo.title == null ? photoManager.photo.fileName : photoManager.photo.title}" />
+			</div>
+			<div>
+				<h:outputText value="#{photoManager.photo.description}" />
+			</div>
+			<h:messages id="messages" globalOnly="true" infoClass="infoStyle"
+				warnClass="warnStyle" errorClass="errorStyle" />
+		</div>
+		<div class="actionpane">
+			<p>
+				<h:outputLink id="viewAlbum" value="#{request.contextPath}/private/album/ViewAlbum.xhtml?albumId=#{photoManager.photo.album.albumId}">
+					<h:outputText value="#{msg['ViewPhoto.viewAlbum.label']}" />
+				</h:outputLink>
+			</p>
+			<p>
+				<h:outputLink value="EditPhoto.xhtml">
+					<f:param name="photoId" value="#{photoManager.photoId}" />
+					<h:outputText id="editPhotoLink" value="#{msg['ViewPhoto.editPhotoLink.label']}" />
+				</h:outputLink>
+			</p>
+			<h:form id="setAlbumCoverForm">
+				<h:commandButton id="setAlbumCoverButton" value="#{msg['ViewPhoto.setAlbumCoverButton.label']}" action="#{photoManager.setAsAlbumCover}" styleClass="submit" />
+			</h:form>
+			<h:form id="deletePhotoForm">
+				<h:commandButton id="deletePhotoButton" value="#{msg['ViewPhoto.deletePhotoButton.label']}" action="#{photoManager.deletePhoto}" styleClass="submit" />
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

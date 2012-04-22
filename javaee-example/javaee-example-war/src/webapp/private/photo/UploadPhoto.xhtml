@@ -1,0 +1,44 @@
+<ui:composition template="/templates/privateLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<ui:define name="title">
+		<h:outputText value="#{msg['UploadPhoto.title']}" />
+	</ui:define>
+	<ui:define name="content">
+		<div class="fullpane">
+			<h:form id="multipartForm" enctype="multipart/form-data" styleClass="form">
+				<ul>
+					<li>
+						<h:outputLabel value="#{msg['UploadPhoto.chooseAlbum.label']}" for="selectedAlbum" />
+						<h:selectOneMenu id="selectedAlbum" value="#{photoManager.uploadRequest.albumId}">
+							<f:selectItems value="#{photoManager.albums}" var="album" itemLabel="#{album.name}" itemValue="#{album.albumId}" />
+						</h:selectOneMenu>
+					</li>
+					<li>
+						<h:outputLabel value="#{msg['UploadPhoto.photoTitle.label']}" for="photoTitle" />
+						<h:inputText id="photoTitle" value="#{photoManager.uploadRequest.title}" />
+					</li>
+					<li>
+						<h:outputLabel value="#{msg['UploadPhoto.photoDescription.label']}" for="photoDescription" />
+						<h:inputTextarea id="photoDescription" value="#{photoManager.uploadRequest.description}" />
+					</li>
+					<li>
+						<h:outputLabel value="#{msg['UploadPhoto.chooseFile.label']}" for="photoUploader" />
+						<p:fileUpload id="photoUploader" mode="simple" multiple="false" value="#{photoManager.uploadRequest.file}" styleClass="file" />
+					</li>
+					<li>
+						<h:commandButton id="uploadButton" action="#{photoManager.uploadPhoto}" value="#{msg['UploadPhoto.uploadButton.label']}" styleClass="submit" />
+						<h:outputLink id="cancel" value="javascript:history.go(-1);" >
+			    			<h:outputText value="#{msg['UploadPhoto.cancel.label']}" />
+			    		</h:outputLink>
+					</li>
+				</ul>
+			</h:form>
+			<h:messages id="messages" showSummary="true" showDetail="false" infoClass="infoStyle"
+				warnClass="warnStyle" errorClass="errorStyle" />
+		</div>
+	</ui:define>
+</ui:composition>

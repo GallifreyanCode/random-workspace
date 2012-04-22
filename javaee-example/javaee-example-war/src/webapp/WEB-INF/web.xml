@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>galleria-jsf</display-name>
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+		<!-- <param-value>Production</param-value> -->
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+	<filter>
+		<filter-name>Galleria User Redirect Filter</filter-name>
+		<filter-class>be.gallifreyan.javaee.filter.UserRedirectFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>Galleria Authentication Filter</filter-name>
+		<filter-class>be.gallifreyan.javaee.filter.AuthenticationFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>Facelet Resource Filter</filter-name>
+		<filter-class>be.gallifreyan.javaee.filter.ResourceFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+		<init-param>
+			<param-name>thresholdSize</param-name>
+			<param-value>51200</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Galleria User Redirect Filter</filter-name>
+		<url-pattern>/Index.xhtml</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Galleria User Redirect Filter</filter-name>
+		<url-pattern>/Signup.xhtml</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Galleria User Redirect Filter</filter-name>
+		<url-pattern>/Login.xhtml</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Galleria Authentication Filter</filter-name>
+		<url-pattern>/private/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Facelet Resource Filter</filter-name>
+		<url-pattern>/templates/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Facelet Resource Filter</filter-name>
+		<url-pattern>/resources/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>Index.xhtml</welcome-file>
+	</welcome-file-list>
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>JAVAEERealm</realm-name>
+	</login-config>
+</web-app>

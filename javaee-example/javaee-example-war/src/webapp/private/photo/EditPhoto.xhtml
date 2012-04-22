@@ -1,0 +1,36 @@
+<ui:composition template="/templates/privateLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="title">
+		<h:outputText value="#{msg['EditPhoto.title']}" />
+	</ui:define>
+	<ui:define name="content">
+	    <f:metadata>
+			<f:viewParam id="photoId" name="photoId" immediate="true" required="true" value="#{photoManager.photoId}" />
+		</f:metadata>
+		<div class="fullpane">
+		    <h:form id="editPhotoForm" styleClass="form">
+		    	<ul>
+			    	<li>
+			    		<h:outputLabel value="#{msg['EditPhoto.photoTitle.label']}" for="photoTitle" />
+			    		<h:inputText id="photoTitle" value="#{photoManager.editRequest.title}" />
+			    	</li>
+			    	<li>
+			    		<h:outputLabel value="#{msg['EditPhoto.photoDescription.label']}" for="photoDescription" />
+			    		<h:inputTextarea id="photoDescription" value="#{photoManager.editRequest.description}" />
+			    	</li>
+			    	<li>
+			    		<h:commandButton id="editPhotoButton" action="#{photoManager.editPhoto}" value="#{msg['EditPhoto.editPhotoButton.label']}" styleClass="submit" />
+			    		<h:outputLink id="viewPhoto" value="ViewPhoto.xhtml?photoId=#{photoManager.photoId}">
+							<h:outputText value="#{msg['EditPhoto.viewPhoto.label']}" />
+						</h:outputLink>
+			    	</li>
+			    </ul>
+		    </h:form>
+		    <h:messages id="messages" showSummary="true" showDetail="false" infoClass="infoStyle"
+				warnClass="warnStyle" errorClass="errorStyle" />
+		</div>
+	</ui:define>
+</ui:composition>
