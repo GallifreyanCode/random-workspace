@@ -14,4 +14,4 @@
  
  * Basic site structure based on unofficial 'standards'
  
-!* The local version of umlgraph is tweaked to work with Java 7 JavaDocs, if you want to use it with Java 6 or below you need to use the official version.
+!* The local version of umlgraph is tweaked to work with Java 7 JavaDocs, if you want to use it with Java 6 or lower you need to use the official version.
