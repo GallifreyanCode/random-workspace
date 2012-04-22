@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs xmlns="http://maven.apache.org/FML/1.0.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+  title="Frequently Asked Questions">
+
+  <part id="general">
+    <title>General</title>
+
+    <faq id="whats-plugin">
+      <question>
+        What is a Maven plugin?
+      </question>
+      <answer>
+        <p>answer</p>
+      </answer>
+    </faq>
+
+    <faq id="whats-this">
+      <question>
+        What is this plugin for?
+      </question>
+      <answer>
+        <p>answer</p>
+      </answer>
+    </faq>
+    
+    <faq id="whats-this">
+      <question>
+        Why need this plugin?
+      </question>
+      <answer>
+        <p>answer</p>
+      </answer>
+    </faq>
+  </part>
+
+  <part id="install">
+    <title>Installation</title>
+    <faq id="how-install">
+      <question>
+        How do I install this plugin?
+      </question>
+      <answer>
+        <p>It's available in the brail Maven repository.
+        You just need to specify the plugin in your POM.</p>
+
+      </answer>
+    </faq>
+
+  </part>
+
+</faqs>
