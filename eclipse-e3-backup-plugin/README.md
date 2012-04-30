@@ -10,7 +10,7 @@ Backup task in package explorer. The selection gets zipped and transferred to an
 
  * Google Drive
  
-Although this is primarily an attempt to learn more about Eclipse plug-in development, I sometimes manually backup some project or classfiles on Dropbox to use on another computer. I hardly ever use the export wizard.
+Although this is primarily an attempt to learn more about Eclipse plug-in development, I sometimes manually backup some project or class files on Dropbox to use on another computer. I hardly ever use the export wizard.
 
 ###Requirements
 
@@ -26,6 +26,10 @@ I have provided two options in the install directory. I recommend using the Ecli
  
  * An alternative approach is by putting the provided jar into the "dropins" directory within your Eclipse installation folder. After restarting Eclipse it should also work.
  
+ * Now right click on a project folder, package or class file in the package explorer, and select the option Create Backup.
+ 
+![Screen0](http://desmond.imageshack.us/Himg36/scaled.php?server=36&filename=backupplugin0.png&res=landing "Screen0")
+
 ###Credits
  
 Some icons created by Mazenl77.
