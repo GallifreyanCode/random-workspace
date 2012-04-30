@@ -16,7 +16,7 @@ Although this is primarily an attempt to learn more about Eclipse plug-in develo
 
  * Eclipse 3.x (Not tested on 4.x)
  
- * Eclipse Plug-in Development Environment
+ * Eclipse Plug-in Development Environment (Only if you want to import the code)
  
 ###Installation
 
