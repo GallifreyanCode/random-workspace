@@ -26,6 +26,10 @@ I have provided two options in the install directory. I recommend using the Ecli
  
  * An alternative approach is by putting the provided jar into the "dropins" directory within your Eclipse installation folder. After restarting Eclipse it should also work.
  
+ * Now right click on a project folder or package in the package explorer, and select the option Create Backup.
+ 
+![Screen0](http://desmond.imageshack.us/Himg36/scaled.php?server=36&filename=backupplugin0.png&res=landing "Screen0")
+
 ###Credits
  
 Some icons created by Mazenl77.
