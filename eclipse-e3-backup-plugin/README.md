@@ -22,7 +22,7 @@ Although this is primarily an attempt to learn more about Eclipse plug-in develo
 
 I have provided two options in the install directory. I recommend using the Eclipse update manager approach.
 
- * Within Eclipse go to the help menu and choose Install new software. Afterwards you give in file:\[path\to\local\install\p2updatesite] and you'll be able to select the plugin and install it.
+ * Within Eclipse go to the help menu and choose Install new software. Afterwards you give in file:\ [path\to\local\install\p2updatesite] and you'll be able to select the plugin and install it.
  
  * An alternative approach is by putting the provided jar into the "dropins" directory within your Eclipse installation folder. After restarting Eclipse it should also work.
  
