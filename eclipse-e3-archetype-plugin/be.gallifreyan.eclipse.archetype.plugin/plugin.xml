@@ -5,7 +5,7 @@
          point="org.eclipse.ui.views">
       <view
             name="Custom Data"
-            icon="icons/sample.gif"
+            icon="icons/sample.png"
             class="org.eclipse.ui.navigator.CommonNavigator"
             id="com.example.test">
       </view>
@@ -99,7 +99,7 @@
                id="be.gallifreyan.eclipse.archetype.plugin.toolbars.sampleToolbar">
             <command
                   commandId="be.gallifreyan.eclipse.archetype.plugin.commands.sampleCommand"
-                  icon="icons/sample.gif"
+                  icon="icons/sample.png"
                   tooltip="New Custom Project"
                   id="be.gallifreyan.eclipse.archetype.plugin.toolbars.sampleCommand">
             </command>

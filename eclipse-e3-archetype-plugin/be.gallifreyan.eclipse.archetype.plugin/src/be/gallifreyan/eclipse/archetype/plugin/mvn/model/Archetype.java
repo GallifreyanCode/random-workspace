@@ -7,6 +7,8 @@ public class Archetype implements Serializable {
 	private String groupId;
 	private String artifactId;
 	private String version;
+	private String repository;
+	private String description;
 
 	public Archetype() {
 	}
@@ -16,6 +18,15 @@ public class Archetype implements Serializable {
 		this.groupId = groupId;
 		this.artifactId = artifactId;
 		this.version = version;
+	}
+	
+	public Archetype(final String groupId, final String artifactId,
+			final String version, final String repository, final String description) {
+		this.groupId = groupId;
+		this.artifactId = artifactId;
+		this.version = version;
+		this.repository = repository;
+		this.description = description;
 	}
 
 	public String getArchetypeGroupId() {
@@ -30,7 +41,16 @@ public class Archetype implements Serializable {
 		return version;
 	}
 
+	public String getRepository() {
+		return repository;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
 	public String toString() {
 		return groupId + ":" + artifactId + ":" + version;
 	}
+	
 }

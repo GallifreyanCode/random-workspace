@@ -28,11 +28,49 @@ public class CustomArchetypes implements IRunnableWithProgress {
 	 * Installs the archetypes defined within the catalog.
 	 */
 	public void run() {
+		/* TODO: Uses list() method twice */
+		for(Archetype archetype : list()){
+			installArtifact(archetype);
+		}
+//		
+//		File file = new File(LOCATION);
+//		String[] args = new String[] {"install"};
+//
+//		MavenCli cli = new MavenCli();
+//		cli.doMain(args, file.getAbsolutePath(), System.out, System.err);
+	}
+	
+	public void installArtifact(Archetype archetype) {
 		File file = new File(LOCATION);
-		String[] args = new String[] {"install"};
-
-		MavenCli cli = new MavenCli();
-		cli.doMain(args, file.getAbsolutePath(), System.out, System.err);
+		if(!isArchetypeInstalled(archetype)){
+			MavenCli cli = new MavenCli();
+			String[] args = new String[] {"org.apache.maven.plugins:maven-dependency-plugin:2.1:get",
+					"-DrepoUrl=" + archetype.getRepository(),
+					"-Dartifact=" + archetype.toString()
+					};
+			
+			cli.doMain(args, file.getAbsolutePath(), System.out, System.err);
+		}
+	}
+	
+	private boolean isArchetypeInstalled(Archetype archetype) {
+		boolean b = false;
+		String location = composeLocation(archetype);
+		System.out.println(location);
+		if(new File(location).exists()){
+			b = true;
+		}
+		return b;
+	}
+	
+	private String composeLocation(Archetype archetype) {
+		String mavenHome = System.getProperty("user.home") + "\\.m2\\repository";
+		String localPath = mavenHome + "\\"
+				+ archetype.getArchetypeGroupId().replace(".", "\\") + "\\"
+				+ archetype.getArchetypeArtifactId().replace(".", "\\") + "\\"
+				+ archetype.getArchetypeVersion();
+		String localJar = archetype.getArchetypeArtifactId() + "-" + archetype.getArchetypeVersion() + ".jar";
+		return localPath + "\\" + localJar;
 	}
 
 	/**
@@ -100,11 +138,13 @@ public class CustomArchetypes implements IRunnableWithProgress {
 	 */
 	private static Archetype createArchetypeFromNode(Element archetypeElement) {
 		Archetype archetype = null;
-		String groupId = null, artifactId = null, version = null;
+		String groupId = null, artifactId = null, version = null, repository = null, description = null;
 		groupId = getNodeValue(archetypeElement, "groupId");
 		artifactId = getNodeValue(archetypeElement, "artifactId");
 		version = getNodeValue(archetypeElement, "version");
-		archetype = new Archetype(groupId, artifactId, version);
+		repository = getNodeValue(archetypeElement, "repository");
+		description = getNodeValue(archetypeElement, "description");
+		archetype = new Archetype(groupId, artifactId, version, repository, description);
 		return archetype;
 	}
 

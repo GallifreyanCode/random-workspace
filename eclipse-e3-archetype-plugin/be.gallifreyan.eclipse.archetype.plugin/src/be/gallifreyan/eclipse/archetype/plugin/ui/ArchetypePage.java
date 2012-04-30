@@ -27,6 +27,7 @@ public class ArchetypePage extends WizardPage {
 		super(pageName);
 		setTitle("Custom Archetypes");
 		setDescription("Please select a Maven archetype");
+		setPageComplete(false);
 	}
 
 	public void createControl(Composite parent) {
@@ -42,6 +43,7 @@ public class ArchetypePage extends WizardPage {
 
 		Table table = createTable(composite);
 		Label linkedInfoText = createlinkedInfoText(composite);
+		//linkedInfoText.setSize(400, 20);
 		addTableListener(table, linkedInfoText);
 
 		// buildProject();
@@ -116,6 +118,7 @@ public class ArchetypePage extends WizardPage {
 	private Table addTableListener(Table table, final Label linkedInfoText) {
 		table.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
+				setPageComplete(true);
 				if (event.detail == SWT.CHECK) {
 					linkedInfoText.setText(getDescriptionFromArchetype(event.item.toString()));
 				} else {
@@ -130,7 +133,7 @@ public class ArchetypePage extends WizardPage {
 		String description = "No description.";
 		for(Archetype archetype : archetypeList){
 			if(archetype.getArchetypeArtifactId().equals(parseWidgetName(artifactId))){
-				description = "this is a description";
+				description = archetype.getDescription();
 			}
 		}
 		return description;
@@ -146,4 +149,5 @@ public class ArchetypePage extends WizardPage {
 		return text;
 	}
 
+	
 }
