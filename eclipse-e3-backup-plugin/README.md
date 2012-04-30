@@ -1,6 +1,6 @@
 ##Eclipse Backup Plugin
 
-Backup task in package explorer. The selection gets zipped and transfered to another location. These are supported:
+Backup task in package explorer. The selection gets zipped and transferred to another location. These are supported:
 
  * A local directory
  
