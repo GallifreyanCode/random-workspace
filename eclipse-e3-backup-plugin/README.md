@@ -10,7 +10,7 @@ Backup task in package explorer. The selection gets zipped and transferred to an
 
  * Google Drive
  
-Although this is primarily an attempt to learn more about Eclipse plug-in development, I sometimes manually backup some project or classfiles on Dropbox to use on another computer. I hardly ever use the export wizard.
+Although this is primarily an attempt to learn more about Eclipse plug-in development, I sometimes manually backup some project or class files on Dropbox to use on another computer. I hardly ever use the export wizard.
 
 ###Requirements
 
