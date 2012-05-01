@@ -19,15 +19,16 @@
 		<jdbc.url>jdbc:derby://localhost:1527/JAVAEEEXAMPLE</jdbc.url>
 		<jdbc.user>APP</jdbc.user>
 		<jdbc.password>APP</jdbc.password>
-		<glassfish.home>C:\Apps\AServers\glassfishv3\glassfish
+		<glassfish.home>C:\Apps\AServers\glassfish3.1.2\glassfish
 		</glassfish.home>
 		<glassfish.domainName>test-domain</glassfish.domainName>
 		<glassfish.user>admin</glassfish.user>
-		<glassfish.port.admin>4848</glassfish.port.admin>
+		<glassfish.port.admin>10048</glassfish.port.admin>
 		<glassfish.port.http>10080</glassfish.port.http><!-- 10048 10080 -->
 		<glassfish.port.https>10081</glassfish.port.https>
-		<glassfish.password.file>${glassfish.home}\domains\test-domain\config\local-password
+		<glassfish.password.file>${glassfish.home}\domains\test-domain\config\passwd.local.file
 		</glassfish.password.file>
+		<chromedriver.url>src/test/resources/chromedriver/chromedriver.exe</chromedriver.url>
 	</properties>
 
 	<dependencies>
@@ -105,6 +106,12 @@
 			<version>${arquillian.drone.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-drone-webdriver</artifactId>
+			<version>${arquillian.drone.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- Selenium 2.5.0 to support Firefox 6.0 -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -151,6 +158,9 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.7.1</version>
 				<configuration>
+					<systemPropertyVariables>
+						<webdriver.chrome.driver>${chromedriver.url}</webdriver.chrome.driver>
+					</systemPropertyVariables>
 					<excludes>
 						<exclude>**/*IntegrationSuite.java</exclude>
 						<exclude>**/*IntegrationTest.java</exclude>
@@ -162,6 +172,9 @@
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<version>2.9</version>
 				<configuration>
+					<systemPropertyVariables>
+						<webdriver.chrome.driver>${chromedriver.url}</webdriver.chrome.driver>
+					</systemPropertyVariables>
 					<includes>
 						<!-- Used to include IntegrationSuite and ITCase classes during integration 
 							testing; avoiding the use of the default naming convention. Includes only 
@@ -190,6 +203,9 @@
 				start-glassfish and stop-glassfish goals should not be run when tests are 
 				skipped. -->
 			<id>integration</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<build>
 				<plugins>
 					<plugin>
