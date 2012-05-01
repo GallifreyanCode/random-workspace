@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-   <feature url="features/be.gallifreyan.eclipse.archetype.plugin.feature_1.0.0.qualifier.jar" id="be.gallifreyan.eclipse.archetype.plugin.feature" version="1.0.0.qualifier">
-      <category name="be.gallifreyan"/>
-   </feature>
-   <category-def name="be.gallifreyan" label="be.gallifreyan"/>
-</site>
