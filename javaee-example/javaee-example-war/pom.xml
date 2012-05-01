@@ -9,8 +9,10 @@
 	<groupId>be.gallifreyan.javaee</groupId>
 	<artifactId>javaee-example-war</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<arquillian.version>1.0.0.CR7</arquillian.version>
 		<arquillian.glassfish-remote.version>1.0.0.CR3</arquillian.glassfish-remote.version>
 		<arquillian.drone.version>1.0.0.CR3</arquillian.drone.version>
@@ -35,6 +37,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>javaee-example-ejb</artifactId>
+			<type>ejb</type>
 			<scope>provided</scope>
 		</dependency>
 
@@ -194,6 +197,13 @@
 					</execution>
 				</executions>
 			</plugin>
+			 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <configuration>
+                        <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                    </configuration>
+                </plugin>
 		</plugins>
 	</build>
 

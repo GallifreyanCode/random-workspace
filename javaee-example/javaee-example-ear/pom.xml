@@ -9,6 +9,7 @@
 	<groupId>be.gallifreyan.javaee</groupId>
 	<artifactId>javaee-example-ear</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>ear</packaging>
 
 	<properties>
 		<ear.plugin.version>2.7</ear.plugin.version>
@@ -16,17 +17,19 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>be.gallifreyan.javaee</groupId>
 			<artifactId>javaee-example-ejb</artifactId>
+			<type>ejb</type>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>be.gallifreyan.javaee</groupId>
 			<artifactId>javaee-example-war</artifactId>
+			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.0.1.Final</version>
+			<version>3.6.10.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -43,6 +46,11 @@
 			<artifactId>jboss-logging</artifactId>
 			<version>3.1.0.CR2</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.5</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -52,51 +60,55 @@
 				<version>${ear.plugin.version}</version>
 				<configuration>
 					<version>6</version>
-					<defaultLibBundleDir>lib</defaultLibBundleDir>
 					<modules>
 						<ejbModule>
-							<groupId>${project.groupId}</groupId>
+							<groupId>be.gallifreyan.javaee</groupId>
 							<artifactId>javaee-example-ejb</artifactId>
 						</ejbModule>
 						<webModule>
-							<groupId>${project.groupId}</groupId>
+							<groupId>be.gallifreyan.javaee</groupId>
 							<artifactId>javaee-example-war</artifactId>
 							<contextRoot>/javaee</contextRoot>
 						</webModule>
-						<!-- <jarModule> -->
-						<!-- <groupId>commons-codec</groupId> -->
-						<!-- <artifactId>commons-codec</artifactId> -->
-						<!-- <bundleDir>/lib</bundleDir> -->
-						<!-- </jarModule> -->
+						<jarModule>
+							<groupId>commons-codec</groupId>
+							<artifactId>commons-codec</artifactId>
+							<bundleDir>/lib</bundleDir>
+						</jarModule>
+						<jarModule>
+								<groupId>org.hibernate</groupId>
+								<artifactId>hibernate-entitymanager</artifactId>
+								<bundleDir>/lib</bundleDir>
+						</jarModule>
 					</modules>
 				</configuration>
 			</plugin><!-- Should have production values here -->
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.glassfish.maven.plugin</groupId> -->
-<!-- 				<artifactId>maven-glassfish-plugin</artifactId> -->
-<!-- 				<version>2.1</version> -->
-<!-- 				<configuration> -->
-<!-- 					<user>${glassfish.user}</user> -->
-<!-- 					<passwordFile>${glassfish.password.file}</passwordFile> -->
-<!-- 					<glassfishDirectory>${glassfish.home}</glassfishDirectory> -->
-<!-- 					<components> -->
-<!-- 						<component> -->
-<!-- 							<name>${project.artifactId}</name> -->
-<!-- 							<artifact>${project.build.directory}/${project.build.finalName}.ear</artifact> -->
-<!-- 						</component> -->
-<!-- 					</components> -->
-<!-- 					<domain> -->
-<!-- 						<name>${glassfish.domainName}</name> -->
-<!-- 						<adminPort>${glassfish.port.admin}</adminPort> -->
-<!-- 						<httpPort>${glassfish.port.http}</httpPort> -->
-<!-- 						<httpsPort>${glassfish.port.https}</httpsPort> -->
-<!-- 					</domain> -->
-<!-- 					<debug>true</debug> -->
-<!-- 					<echo>true</echo> -->
-<!-- 					<terse>false</terse> -->
-<!-- 					<autoCreate>false</autoCreate> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.glassfish.maven.plugin</groupId> -->
+			<!-- <artifactId>maven-glassfish-plugin</artifactId> -->
+			<!-- <version>2.1</version> -->
+			<!-- <configuration> -->
+			<!-- <user>${glassfish.user}</user> -->
+			<!-- <passwordFile>${glassfish.password.file}</passwordFile> -->
+			<!-- <glassfishDirectory>${glassfish.home}</glassfishDirectory> -->
+			<!-- <components> -->
+			<!-- <component> -->
+			<!-- <name>${project.artifactId}</name> -->
+			<!-- <artifact>${project.build.directory}/${project.build.finalName}.ear</artifact> -->
+			<!-- </component> -->
+			<!-- </components> -->
+			<!-- <domain> -->
+			<!-- <name>${glassfish.domainName}</name> -->
+			<!-- <adminPort>${glassfish.port.admin}</adminPort> -->
+			<!-- <httpPort>${glassfish.port.http}</httpPort> -->
+			<!-- <httpsPort>${glassfish.port.https}</httpsPort> -->
+			<!-- </domain> -->
+			<!-- <debug>true</debug> -->
+			<!-- <echo>true</echo> -->
+			<!-- <terse>false</terse> -->
+			<!-- <autoCreate>false</autoCreate> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
 		</plugins>
 	</build>
 </project>

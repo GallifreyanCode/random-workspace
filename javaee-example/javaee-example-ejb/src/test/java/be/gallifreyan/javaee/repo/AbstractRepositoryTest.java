@@ -32,7 +32,7 @@ public class AbstractRepositoryTest {
 	public static void beforeClass() {
 		logger.info("Running the beforeClass method of {}",
 				AbstractRepositoryTest.class);
-		emf = Persistence.createEntityManagerFactory("javaee-example-ejb");
+		emf = Persistence.createEntityManagerFactory("javaee-example-ejb-test");
 	}
 
 	@AfterClass

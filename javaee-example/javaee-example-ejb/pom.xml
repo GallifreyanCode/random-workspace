@@ -9,6 +9,7 @@
 	<groupId>be.gallifreyan.javaee</groupId>
 	<artifactId>javaee-example-ejb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>ejb</packaging>
 
 	<properties>
 		<!-- 4.1.1.Final -->

@@ -69,7 +69,7 @@ public class AllPagesIntegrationTest
 
 		WebArchive webArchive = ShrinkWrap
 				.create(WebArchive.class, "javaee-example-war.war") // Ensure that this is not "galleria-jsf.war", for now
-				.setWebXML(new File("src/webapp/WEB-INF/web.xml"))
+				.setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
 				.addPackage("be.gallifreyan.javaee.converter")
 				.addPackage("be.gallifreyan.javaee.filter")
 				.addPackage("be.gallifreyan.javaee.i18n")
@@ -78,24 +78,24 @@ public class AllPagesIntegrationTest
 				.addAsResource("resources/messages_en.properties", "resources/messages_en.properties")
 				.addAsResource("resources/messages_de.properties", "resources/messages_de.properties")
 				.addAsResource("resources/StandardIcon.png", "resources/StandardIcon.png")
-				.addAsWebResource(new File("src/webapp/templates", "content.xhtml"), "templates/content.xhtml")
-				.addAsWebResource(new File("src/webapp/templates", "defaultLayout.xhtml"),	"templates/defaultLayout.xhtml")
-				.addAsWebResource(new File("src/webapp/templates", "footer.xhtml"), "templates/footer.xhtml")
-				.addAsWebResource(new File("src/webapp/templates", "header.xhtml"), "templates/header.xhtml")
-				.addAsWebResource(new File("src/webapp/templates", "privateLayout.xhtml"), "templates/privateLayout.xhtml")
-				.addAsWebResource(new File("src/webapp/resources/styles", "all.css"), "resources/styles/all.css")
-				.addAsWebResource(new File("src/webapp", "Index.xhtml"))
-				.addAsWebResource(new File("src/webapp", "Signup.xhtml"))
-				.addAsWebResource(new File("src/webapp", "Login.xhtml"))
-				.addAsWebResource(new File("src/webapp/private", "HomePage.xhtml"), "private/HomePage.xhtml")
-				.addAsWebResource(new File("src/webapp/private/user", "AccountPreferences.xhtml"), "private/user/AccountPreferences.xhtml")
-				.addAsWebResource(new File("src/webapp/private/album", "CreateAlbum.xhtml"), "private/album/CreateAlbum.xhtml")
-				.addAsWebResource(new File("src/webapp/private/album", "EditAlbum.xhtml"), "private/album/EditAlbum.xhtml")
-				.addAsWebResource(new File("src/webapp/private/album", "ViewAlbum.xhtml"), "private/album/ViewAlbum.xhtml")
-				.addAsWebResource(new File("src/webapp/private/photo", "UploadPhoto.xhtml"), "private/photo/UploadPhoto.xhtml")
-				.addAsWebResource(new File("src/webapp/private/photo", "EditPhoto.xhtml"), "private/photo/EditPhoto.xhtml")
-				.addAsWebResource(new File("src/webapp/private/photo", "ViewPhoto.xhtml"), "private/photo/ViewPhoto.xhtml")
-				.addAsWebInfResource(new File("src/webapp/WEB-INF/faces-config.xml"), "faces-config.xml")
+				.addAsWebResource(new File("src/main/webapp/templates", "content.xhtml"), "templates/content.xhtml")
+				.addAsWebResource(new File("src/main/webapp/templates", "defaultLayout.xhtml"),	"templates/defaultLayout.xhtml")
+				.addAsWebResource(new File("src/main/webapp/templates", "footer.xhtml"), "templates/footer.xhtml")
+				.addAsWebResource(new File("src/main/webapp/templates", "header.xhtml"), "templates/header.xhtml")
+				.addAsWebResource(new File("src/main/webapp/templates", "privateLayout.xhtml"), "templates/privateLayout.xhtml")
+				.addAsWebResource(new File("src/main/webapp/resources/styles", "all.css"), "resources/styles/all.css")
+				.addAsWebResource(new File("src/main/webapp", "Index.xhtml"))
+				.addAsWebResource(new File("src/main/webapp", "Signup.xhtml"))
+				.addAsWebResource(new File("src/main/webapp", "Login.xhtml"))
+				.addAsWebResource(new File("src/main/webapp/private", "HomePage.xhtml"), "private/HomePage.xhtml")
+				.addAsWebResource(new File("src/main/webapp/private/user", "AccountPreferences.xhtml"), "private/user/AccountPreferences.xhtml")
+				.addAsWebResource(new File("src/main/webapp/private/album", "CreateAlbum.xhtml"), "private/album/CreateAlbum.xhtml")
+				.addAsWebResource(new File("src/main/webapp/private/album", "EditAlbum.xhtml"), "private/album/EditAlbum.xhtml")
+				.addAsWebResource(new File("src/main/webapp/private/album", "ViewAlbum.xhtml"), "private/album/ViewAlbum.xhtml")
+				.addAsWebResource(new File("src/main/webapp/private/photo", "UploadPhoto.xhtml"), "private/photo/UploadPhoto.xhtml")
+				.addAsWebResource(new File("src/main/webapp/private/photo", "EditPhoto.xhtml"), "private/photo/EditPhoto.xhtml")
+				.addAsWebResource(new File("src/main/webapp/private/photo", "ViewPhoto.xhtml"), "private/photo/ViewPhoto.xhtml")
+				.addAsWebInfResource(new File("src/main/webapp/WEB-INF/faces-config.xml"), "faces-config.xml")
 				/* .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml") */
 				.addAsLibraries(
 						DependencyResolvers
@@ -110,12 +110,13 @@ public class AllPagesIntegrationTest
 		EnterpriseArchive enterpriseArchive = ShrinkWrap
 				.create(EnterpriseArchive.class, "javaee-example-ear.ear")
 				.addAsModule(webArchive)
-				.addAsModule(ejbArchive);
-//				.addAsLibraries(
-//						DependencyResolvers
-//								.use(MavenDependencyResolver.class)
-//								.artifact("commons-codec:commons-codec:1.5")
-//								.resolveAsFiles());
+				.addAsModule(ejbArchive)
+				.addAsLibraries(
+						DependencyResolvers
+								.use(MavenDependencyResolver.class)
+								.artifact("commons-codec:commons-codec:1.5")
+								.artifact("org.hibernate:hibernate-entitymanager:3.6.10.Final")
+								.resolveAsFiles());
 		System.out.println("******Contents of EAR Archive******");
 		System.out.println(enterpriseArchive.toString(true));
 
