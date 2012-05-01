@@ -68,7 +68,7 @@ public class AllPagesIntegrationTest
 		System.out.println(ejbArchive.toString(true));
 
 		WebArchive webArchive = ShrinkWrap
-				.create(WebArchive.class, "javaee-example-war.war") // Ensure that this is not "galleria-jsf.war", for now
+				.create(WebArchive.class, "foo-javaee-example-war.war") // Ensure that this is not "galleria-jsf.war", for now
 				.setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
 				.addPackage("be.gallifreyan.javaee.converter")
 				.addPackage("be.gallifreyan.javaee.filter")
@@ -108,7 +108,7 @@ public class AllPagesIntegrationTest
 		System.out.println(webArchive.toString(true));
 
 		EnterpriseArchive enterpriseArchive = ShrinkWrap
-				.create(EnterpriseArchive.class, "javaee-example-ear.ear")
+				.create(EnterpriseArchive.class, "example.ear")
 				.addAsModule(webArchive)
 				.addAsModule(ejbArchive)
 				.addAsLibraries(

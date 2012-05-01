@@ -57,6 +57,7 @@ public class Authenticator
 		}
 		catch (ServletException ex)
 		{
+			ex.printStackTrace();
 			logger.error("Failed to authenticate user.", ex);
 			Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, Messages.getString(

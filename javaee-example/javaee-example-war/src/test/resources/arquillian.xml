@@ -7,12 +7,9 @@
 	<!-- Remote Glassfish configuration -->
 	<container qualifier="glassfish" default="true">
 		<configuration>
-		 <property name="contextRoot">javaee-example-war</property>
+<!-- 		 <property name="contextRoot">javaee</property> -->
 			<property name="adminPort">10048</property>
 		</configuration>
-		<protocol type="Servlet 3.0">
-            <property name="contextRoot">javaee-example-war</property>
-        </protocol>
 	</container>
 	<!-- Firefox Driver configuration
 	<extension qualifier="webdriver">

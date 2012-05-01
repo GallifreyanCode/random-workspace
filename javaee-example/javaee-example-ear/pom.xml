@@ -31,11 +31,11 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>3.6.10.Final</version>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>4.0.1.Final</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.hibernate</groupId> -->
+<!-- 			<artifactId>hibernate-core</artifactId> -->
+<!-- 			<version>4.0.1.Final</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -59,6 +59,7 @@
 				<artifactId>maven-ear-plugin</artifactId>
 				<version>${ear.plugin.version}</version>
 				<configuration>
+				   <defaultLibBundleDir>lib</defaultLibBundleDir>
 					<version>6</version>
 					<modules>
 						<ejbModule>
@@ -70,16 +71,6 @@
 							<artifactId>javaee-example-war</artifactId>
 							<contextRoot>/javaee</contextRoot>
 						</webModule>
-						<jarModule>
-							<groupId>commons-codec</groupId>
-							<artifactId>commons-codec</artifactId>
-							<bundleDir>/lib</bundleDir>
-						</jarModule>
-						<jarModule>
-								<groupId>org.hibernate</groupId>
-								<artifactId>hibernate-entitymanager</artifactId>
-								<bundleDir>/lib</bundleDir>
-						</jarModule>
 					</modules>
 				</configuration>
 			</plugin><!-- Should have production values here -->

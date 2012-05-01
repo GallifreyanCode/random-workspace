@@ -74,6 +74,6 @@
 	</welcome-file-list>
 	<login-config>
 		<auth-method>FORM</auth-method>
-		<realm-name>JAVAEERealm</realm-name>
+		<realm-name>JavaEERealm</realm-name>
 	</login-config>
 </web-app>
