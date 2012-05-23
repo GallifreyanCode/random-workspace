@@ -1,0 +1,30 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<preConditions>
+		<dbms type="derby" />
+		<runningAs username="APP" />
+	</preConditions>
+
+	<changeSet id="1" author="gallifreyan">
+		<createTable tableName="department">
+			<column name="ID" type="int">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="NAME" type="varchar(40)">
+				<constraints nullable="false" />
+			</column>
+			<column name="ACTIVE" type="boolean" defaultValueBoolean="true" />
+		</createTable>
+		<rollback>
+			<dropTable tableName="department" />
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="2" author="gallifreyan">
+		<rollback changeSetId="1" changeSetAuthor="exf133" />
+	</changeSet>
+</databaseChangeLog>
