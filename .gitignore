@@ -5,5 +5,6 @@
 *.iml
 *.project
 *.classpath
+*.jmod
 target/
 /javaee-example/javaee-example-war/chromedriver.log
