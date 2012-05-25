@@ -1,0 +1,56 @@
+task hello << {
+        println 'Hello world!'
+}
+
+task upper << {
+	String someString = 'mY_nAmE'
+	println "Original: " + someString
+	println "Upper case: " + someString.toUpperCase()
+}
+
+task count << {
+	4.times { print "$it " }
+}
+
+task intro(dependsOn: hello) << {
+	println "I'm Gradle"
+}
+
+4.times { counter ->
+    task "task$counter" << {
+        println "I'm task number $counter"
+    }
+}
+/* Add dependency dynamically */
+task0.dependsOn task2, task3
+
+task hellobehaviour << {
+    println 'Hello Earth'
+}
+hellobehaviour.doFirst {
+    println 'Hello Venus'
+}
+hellobehaviour.doLast {
+    println 'Hello Mars'
+}
+hellobehaviour << {
+    println 'Hello Jupiter'
+}
+
+/* Add custom properties */
+task myTask
+myTask.ext.myProperty = 'myCustomPropValue'
+task showProps << {
+    println myTask.myProperty
+}
+
+task loadfile << {
+    def files = file('/antLoadfileResources').listFiles().sort()
+	files.each { File file ->
+			if (file.isFile()) {
+				ant.loadfile(srcFile: file, property: file.name)
+				println " *** $file.name ***"
+				println "${ant.properties[file.name]}"
+        }
+    }
+}
