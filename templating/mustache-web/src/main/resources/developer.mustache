@@ -1,0 +1,15 @@
+{{!This is the mustache template}}
+    {{#developers}}
+    First Name: {{firstName}}
+    Last Name: {{lastName}}
+    Role: {{getRole}}
+    Company: {{getCompany}}
+    Projects:
+    {{#projects}}
+        {{> project}} {{! partial in mustache}}
+    {{/projects}}
+    ******************************************
+    {{/developers}}
+    {{^developers}}
+    No developers :(
+    {{/developers}}

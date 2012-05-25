@@ -1,0 +1,25 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>mustache-web</display-name>
+	<servlet>
+		<description></description>
+		<display-name>Servlet</display-name>
+		<servlet-name>Servlet</servlet-name>
+		<servlet-class>be.gallifreyan.mustache.servlet.ServletResponse</servlet-class>
+	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>BasicPage</display-name>
+		<servlet-name>BasicPage</servlet-name>
+		<servlet-class>be.gallifreyan.mustache.servlet.ServletBasicPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Servlet</servlet-name>
+		<url-pattern>/servlet.pdf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>BasicPage</servlet-name>
+		<url-pattern>/basic.html</url-pattern>
+	</servlet-mapping>
+</web-app>

@@ -1,0 +1,37 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>{{pageName}}</title>
+	<meta name="description" content="{{pageDescription}}">
+	<meta name="viewport" content="width=device-width">
+</head>
+<body id="top">
+	<header>
+		<h1>{{pageTitle}}</h1>
+	</header>
+	<div id="headwrap">
+		<ul>
+    	{{#developers}}
+    	<h2>Developer {{count}}:</h2>
+    	<li>First Name: {{firstName}}</li>
+   		<li>Last Name: {{lastName}}</li>
+    	<li>Role: {{getRole}}</li>
+    	<li>Company: {{getCompany}}</li>
+    	<h3>Projects:</h3>
+    		<ul>
+    		{{#projects}}
+    		<li>{{code}}: {{description}}</li>
+    		{{/projects}}
+    		</ul>
+    	{{/developers}}
+    	</ul>
+    	{{^developers}}
+    	<h2>No developers :(</h2>
+    	{{/developers}}
+	</div>
+</body>
+</html>
