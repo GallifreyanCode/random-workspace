@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs xmlns="http://maven.apache.org/FML/1.0.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+  title="Frequently Asked Questions">
+
+  <part id="general">
+    <title>General</title>
+
+    <faq id="whats-plugin">
+      <question>
+        What is ...?
+      </question>
+      <answer>
+        <p>
+		Most of Maven's functionality is in plugins. A plugin provides a set of goals that can be executed using the following syntax:
+		</p>
+		<source>mvn [plugin-name]:[goal-name]</source>
+		<p>
+		For example, a Java project can be compiled with the compiler-plugin's compile-goal by running mvn compiler:compile.
+		There are Maven plugins for building, testing, source control management, running a web server, generating Eclipse project files, and much more. Plugins are introduced and configured in a plugins-section of a pom.xml file. Some basic plugins are included in every project by default, and they have sensible default settings.
+		See <a href="http://en.wikipedia.org/wiki/Apache_Maven#Plugins">Wikipedia</a> for more information.
+		</p>
+      </answer>
+    </faq>
+
+    <faq id="whats-this">
+      <question>
+        What is this plugin for?
+      </question>
+      <answer>
+        <p>To automate the JavaFX 2 build process through clear and maintainable build configurations.</p>
+      </answer>
+    </faq>
+    
+    <faq id="whats-this">
+      <question>
+        Why need this plugin?
+      </question>
+      <answer>
+        <p>
+		Official build support for JavaFX 2 applications is restricted to Netbeans. It relies on a vast set of Ant tasks provided by the JavaFX 2 SDK.
+		</p>
+		<p>
+		To integrate with our Maven builds and exploit the pluggable nature of Maven we created this plugin as a layer on top of the already available functionalitites.
+		This gives us the best of two worlds, Maven plugin advantages and reusability of existing functionalities.
+		</p>
+		<p>
+		It is a proven solution, with it we we're able to recreate the JavaFX 2 Ensemble application which is the big showcase application that includes most stuff available in JavaFX 2.
+		</p>
+      </answer>
+    </faq>
+  
+  <faq id="more-features">
+      <question>
+        More features?
+      </question>
+      <answer>
+        <p>
+		As stated in the previous question, part of the Maven plugin is integration of already available functionalities. At the moment not all functionalities and configuration options have been made available through the plugin.
+		See the <a href="http://docs.oracle.com/javafx/2.0/deployment/javafx_ant_task_reference001.htm#CIAJGAFH">JavaFX 2 docs</a> to view all of them. These and other features which are specific to our needs can be requested by contacting the <a href="mailto:kim.kerger@b-holding.be">JavaCC</a>.
+		</p>
+      </answer>
+    </faq>
+  </part>
+
+  <part id="install">
+    <title>Installation</title>
+    <faq id="how-install">
+      <question>
+        How do I install this plugin?
+      </question>
+      <answer>
+        <p>It's available in the brail Maven repository.
+        You just need to specify the plugin in your POM.</p>
+        
+<source><![CDATA[<plugin>
+	<groupId>be.brail.javafx2</groupId>
+	<artifactId>javafx2-maven-plugin</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+</plugin>]]></source>
+        
+      </answer>
+    </faq>
+
+  </part>
+
+</faqs>

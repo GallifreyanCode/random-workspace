@@ -1,0 +1,80 @@
+ ------
+ Basic Application
+ ------
+ Kim Kerger
+ ------
+ 2012-04-20
+ ------
+
+
+Basic Application
+
+  This application will have the following characteristics:
+  
+ * A small application with 1 class.
+ 
+ * A deploy package will be created.
+ 
+ * The jar files will be signed, a new keystore will be created by the plugin itself.
+
+* Maven Configuration
+
+  Below you'll find the Maven configurations which are added in the <<<pom.xml>>>.
+  
++-------------------------------------------
+<plugin>
+	<groupId>be.brail.javafx2</groupId>
+	<artifactId>javafx2-maven-plugin</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<configuration>
+		<!-- Modes -->
+		<createDeployPackage>true</createDeployPackage>
+		<sign>true</sign>
+		<!-- Deploy Package Settings -->
+		<mainClass>${mainclass}</mainClass>			
+		<!-- Sign Settings -->
+		<createNewKeystore>thisisatest</createNewKeystore>
+		<keystoreAlias>devkeystore</keystoreAlias>
+		<keystorePassword>password</keystorePassword>
+	</configuration>
+	<executions>
+		<execution>
+			<phase>package</phase>
+			<goals>
+				<goal>create</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
++-------------------------------------------
+
+* Using existing keystore
+
+ If you want to use an existing keystore, you need to change one line in the <<<pom.xml>>>.
+  
++-------------------------------------------
+<plugin>
+	<groupId>be.brail.javafx2</groupId>
+	<artifactId>javafx2-maven-plugin</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<configuration>
+		<!-- Modes -->
+		<createDeployPackage>true</createDeployPackage>
+		<sign>true</sign>
+		<!-- Deploy Package Settings -->
+		<mainClass>${mainclass}</mainClass>			
+		<!-- Sign Settings -->
+		<useExistingKeystore>${project.basedir}\src\jnlp\devkeystore.jks</useExistingKeystore>
+		<keystoreAlias>devkeystore</keystoreAlias>
+		<keystorePassword>password</keystorePassword>
+	</configuration>
+	<executions>
+		<execution>
+			<phase>package</phase>
+			<goals>
+				<goal>create</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
++-------------------------------------------

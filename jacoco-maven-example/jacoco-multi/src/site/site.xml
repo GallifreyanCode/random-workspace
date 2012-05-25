@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="JavaFX 2 Maven Plugin">
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.2.1</version>
+	</skin>
+
+	<custom>
+		<fluidoSkin>
+			<topBarEnabled>true</topBarEnabled>
+			<sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+		</fluidoSkin>
+	</custom>
+	
+	<bannerRight>
+		<src>images/logos/ictra.gif</src>
+	</bannerRight>
+	<publishDate position="right" format="yyyy-MM-dd" />
+	<version position="right" />
+	<poweredBy>
+		<logo name="JavaCC" href="http://brailcentralmavenrepository/LBE/"
+			img="http://brailcentralmavenrepository/LBE/images/JavaCC_logo.png" />
+	</poweredBy>
+
+	<body>
+		<breadcrumbs>
+			<item name="Apache" href="http://www.apache.org/" />
+			<item name="Maven" href="http://maven.apache.org/" />
+			<item name="JavaCC" href="http://brailcentralmavenrepository/LBE/" />
+		</breadcrumbs>
+
+		<menu name="Overview">
+			<item name="Introduction" href="index.html" />
+			<item name="Goals" href="plugin-info.html" />
+			<item name="Usage" href="usage.html" />
+			<item name="FAQ" href="faq.html" />
+		</menu>
+
+		<menu name="Examples">
+			<item name="Basic Project" href="examples/exbasic.html" />
+		</menu>
+		
+		<menu ref="modules" />
+		
+		<menu ref="reports" />
+	</body>
+</project>
