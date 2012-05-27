@@ -18,6 +18,6 @@ public class Developer {
 		return role;
 	}
 	public String getCompany(){
-		return "ICTRA";
+		return "Company";
 	}
 }
