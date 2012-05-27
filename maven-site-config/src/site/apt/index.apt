@@ -1,7 +1,7 @@
  ------
  Introduction
  ------
- Kim Kerger
+ GallifreyanCode
  ------
  2012-04-20
  ------
@@ -9,7 +9,7 @@
 
 Test Site
 
-  Plugin introduction, description, and other relevant information.
+  Introduction, description, and other relevant information.
 
 * Goals Overview
 
@@ -39,5 +39,3 @@ Test Site
   you can take a look into the following examples:
 
   * {{{examples/exbasic.html}Basic Project}}
-
-  * {{{examples/example-two.html}Example Description Two}}
