@@ -42,9 +42,8 @@
         How do I install this plugin?
       </question>
       <answer>
-        <p>It's available in the brail Maven repository.
+        <p>It's available in the Maven repository.
         You just need to specify the plugin in your POM.</p>
-
       </answer>
     </faq>
 
