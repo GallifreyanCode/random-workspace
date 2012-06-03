@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://gallifreyan.be/usermanagement/schemas"
+	elementFormDefault="qualified" 
+	xmlns:tns="http://gallifreyan.be/usermanagement/schemas"
+	xmlns:schemas="http://gallifreyan.be/usermanagement/schemas">
+	
+	<xs:element name="UserProfileCreateRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="UserProfile" type="schemas:UserProfile" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="UserProfile">
+		<xs:sequence>
+			<xs:element name="firstName" type="xs:string" />
+			<xs:element name="lastName" type="xs:string" />
+			<xs:element name="age" type="xs:integer" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="UserProfileCreateResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="message" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+
+	<persistence-unit name="mvc" transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>be.gallifreyan.mvc.Role</class>
+		<class>be.gallifreyan.mvc.User</class>
+		<properties>
+			<property name="eclipselink.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver" />
+			<property name="eclipselink.jdbc.url"
+				value="jdbc:derby://localhost:1527/springmvcexample;create=true" />
+			<property name="eclipselink.jdbc.user" value="APP" />
+			<property name="eclipselink.jdbc.password" value="APP" />
+			<property name="eclipselink.target-database" value="DERBY" />
+			<property name="eclipselink.logging.level" value="FINEST" />
+			<property name="eclipselink.logging.level.ejb_or_metadata"
+				value="WARNING" />
+			<property name="eclipselink.logging.timestamp" value="false" />
+			<property name="eclipselink.logging.thread" value="false" />
+			<property name="eclipselink.logging.session" value="false" />
+			<property name="eclipselink.logging.exceptions" value="false" />
+			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+			<property name="eclipselink.weaving" value="static" />
+		</properties>
+	</persistence-unit>
+</persistence>

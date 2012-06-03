@@ -1,0 +1,13 @@
+package be.gallifreyan.ws.server;
+
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import be.gallifreyan.ws.server.config.WSTestConfig;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {	WSTestConfig.class
+								})
+public abstract class AbstractServerTesting {
+}

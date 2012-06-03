@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>be.gallifreyan.spring</groupId>
+	<artifactId>spring-new</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<java.version>1.7</java.version>
+		<jetty.plugin.version>8.1.3.v20120416</jetty.plugin.version>
+		<inject.version>1</inject.version>
+		<servlet.spec.version>1.0</servlet.spec.version>
+		<jslt.version>1.2</jslt.version>
+		<jsp.version>2.1</jsp.version>
+		<jpa.spec.version>1.0.0.Final</jpa.spec.version>
+		<spring.version>3.1.1.RELEASE</spring.version>
+		<spring.security.version>3.1.0.RELEASE</spring.security.version>
+		<!-- <spring.data.jpa.version>1.0.3.RELEASE</spring.data.jpa.version> -->
+		<spring.data.jpa.version>1.1.0.RC1</spring.data.jpa.version>
+		<spring.data.mongo.version>1.1.0.M1</spring.data.mongo.version>
+		<spring.data.commons.version>1.3.0.M1</spring.data.commons.version>
+		<eclipselink.version>2.3.2</eclipselink.version>
+		<validation.version>1.0.0.GA</validation.version>
+		<hibernate.validator.version>4.3.0.Final</hibernate.validator.version>
+		<antrun.plugin.version>1.7</antrun.plugin.version>
+		<aspectj.version>1.5.4</aspectj.version>
+		<hsqldb.version>2.2.8</hsqldb.version>
+		<logback.version>1.0.3</logback.version>
+		<slf4j.version>1.6.4</slf4j.version>
+		<groovy.version>1.8.6</groovy.version>
+		<junit.version>4.10</junit.version>
+		<mockito.version>1.9.0</mockito.version>
+		<cglib.version>2.2.2</cglib.version>
+		<compiler.plugin.version>2.3.2</compiler.plugin.version>
+		<tomcat.plugin.version>0.9.6</tomcat.plugin.version>
+		<tomcat.version>7.0.27</tomcat.version>
+		<mysql.version>5.1.20</mysql.version>
+		<hibernate.version>4.1.3.Final</hibernate.version>
+		<surefire.plugin.version>2.12</surefire.plugin.version>
+		<failsafe.plugin.version>2.12</failsafe.plugin.version>
+	</properties>
+
+	<modules>
+		<module>spring-new-api</module>
+		<module>spring-new-config</module>
+		<module>spring-new-logging</module>
+		<module>spring-new-persistence</module>
+		<module>spring-new-mvc</module>
+		<module>spring-new-itest</module>
+		<module>spring-new-ws</module>
+		<module>spring-new-rest</module>
+	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>${inject.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>springsource-milestones</id>
+			<name>SpringSource Milestones Proxy</name>
+			<url>https://oss.sonatype.org/content/repositories/springsource-milestones</url>
+		</repository>
+	</repositories>
+</project>

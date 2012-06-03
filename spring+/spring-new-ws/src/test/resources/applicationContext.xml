@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+        
+        <!--  if userprofile works move this to wsClientTestConfig -->
+    <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">
+        <property name="soapVersion">
+            <util:constant static-field="org.springframework.ws.soap.SoapVersion.SOAP_11" />
+        </property>
+    </bean>
+        
+    <bean id="orderServiceMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="contextPath" value="be.gallifreyan.ws.model" />
+    </bean>
+    
+    <bean id="orderServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+        <constructor-arg ref="messageFactory" />
+        <property name="marshaller" ref="orderServiceMarshaller"></property>
+        <property name="unmarshaller" ref="orderServiceMarshaller"></property>
+        <property name="messageSender">
+            <bean
+                class="org.springframework.ws.transport.http.CommonsHttpMessageSender">
+            </bean>
+        </property>
+        <property name="defaultUri" value="http://localhost:9773/spring-ws/OrderService" />
+    </bean>
+    
+    <bean id="OrderServiceClient" class="be.gallifreyan.ws.client.test.OrderServiceClient">
+        <constructor-arg ref="orderServiceTemplate"></constructor-arg>
+    </bean>
+</beans>
