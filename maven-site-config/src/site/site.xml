@@ -36,7 +36,6 @@
 
 		<menu name="Examples">
 			<item name="Basic Project" href="examples/exbasic.html" />
-			<item name="description2" href="examples/example-two.html" />
 		</menu>
 
 		<menu ref="reports" />
