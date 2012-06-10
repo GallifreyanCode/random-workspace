@@ -13,8 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import be.gallifreyan.api.EntityService;
-import be.gallifreyan.logging.LogLevel;
-import be.gallifreyan.logging.annotation.LoggableMethod;
 import be.gallifreyan.persistence.entity.User;
 import be.gallifreyan.persistence.repo.Repository;
 
@@ -30,7 +28,6 @@ public class UserService implements EntityService<User>, UserDetailsService {
 	public UserService() {
 	}
 
-	@LoggableMethod(LogLevel.ERROR)
 	public User save(User user) {
 		return repository.save(user);
 	}
@@ -47,7 +44,6 @@ public class UserService implements EntityService<User>, UserDetailsService {
 	}
 
 	@Override
-	@LoggableMethod(LogLevel.ERROR)
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		User user = repository.findByName(username);

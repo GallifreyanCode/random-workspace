@@ -17,6 +17,10 @@ import be.gallifreyan.persistence.service.DeveloperService;
 public class HomeController {
 	@Inject
 	private DeveloperService developerService;
+	
+	protected void setDeveloperService(DeveloperService developerService) {
+		this.developerService = developerService;
+	}
 
 	@RequestMapping(value = "/developers", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {

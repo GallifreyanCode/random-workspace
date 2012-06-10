@@ -14,10 +14,11 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.ws</groupId>
-			<artifactId>spring-ws</artifactId>
-			<version>${spring.ws.version}</version>
+	<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-servlet_3.0_spec</artifactId>
+			<version>${servlet.spec.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<artifactId>spring-new-api</artifactId>
@@ -26,11 +27,6 @@
 		</dependency>
 		<dependency>
 			<artifactId>spring-new-logging</artifactId>
-			<groupId>be.gallifreyan.spring</groupId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<artifactId>spring-new-config</artifactId>
 			<groupId>be.gallifreyan.spring</groupId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -80,8 +76,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework.data</groupId> <artifactId>spring-data-jpa</artifactId> 
-			<version>${spring.data.jpa.version}</version> </dependency> -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>

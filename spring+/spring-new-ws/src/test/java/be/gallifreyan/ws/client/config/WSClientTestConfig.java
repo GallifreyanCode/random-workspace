@@ -12,8 +12,9 @@ import org.springframework.ws.transport.http.CommonsHttpMessageSender;
 @Configuration
 @ComponentScan({ "be.gallifreyan.ws.client.test" })
 public class WSClientTestConfig {
-	public static final String ORDER_URI = "http://localhost:9773/spring-ws/OrderService";
-	public static final String PROFILE_URI = "http://localhost:9773/spring-ws/ProfileService";
+	public static final String WS_URI = "http://localhost:9773/ws";
+	public static final String ORDER_URI = "http://localhost:9773/ws/OrderService";
+	public static final String PROFILE_URI = "http://localhost:9773/ws/ProfileService";
 	
 	public WSClientTestConfig() {
 		super();
@@ -22,7 +23,7 @@ public class WSClientTestConfig {
 	@Bean
 	public SaajSoapMessageFactory messageFactory() {
 		SaajSoapMessageFactory messageFactory = new SaajSoapMessageFactory();
-		messageFactory.setSoapVersion(SoapVersion.SOAP_11);
+		messageFactory.setSoapVersion(SoapVersion.SOAP_12);
 		return new SaajSoapMessageFactory();
 	}
 
@@ -40,7 +41,7 @@ public class WSClientTestConfig {
 		orderServiceTemplate.setMarshaller(orderServiceMarshaller);
 		orderServiceTemplate.setUnmarshaller(orderServiceMarshaller);
 		orderServiceTemplate.setMessageSender(new CommonsHttpMessageSender());
-		orderServiceTemplate.setDefaultUri(ORDER_URI);
+		orderServiceTemplate.setDefaultUri(WS_URI);
 		return orderServiceTemplate;
 	}
 	
@@ -51,7 +52,7 @@ public class WSClientTestConfig {
 		orderServiceTemplate.setMarshaller(orderServiceMarshaller);
 		orderServiceTemplate.setUnmarshaller(orderServiceMarshaller);
 		//orderServiceTemplate.setMessageSender(new CommonsHttpMessageSender());
-		orderServiceTemplate.setDefaultUri(PROFILE_URI);
+		orderServiceTemplate.setDefaultUri(WS_URI);
 		return orderServiceTemplate;
 	}
 }

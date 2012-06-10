@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import be.gallifreyan.config.profile.DataConfig;
 
 @Configuration
+@EnableAspectJAutoProxy
 @EnableTransactionManagement
 @ImportResource("classpath:spring/dataConfig.xml")
 @ComponentScan(basePackages= "be.gallifreyan", excludeFilters =  @org.springframework.context.annotation.ComponentScan.Filter(type=FilterType.ASSIGNABLE_TYPE, value=WebMvcConfig.class))

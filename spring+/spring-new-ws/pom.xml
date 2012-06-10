@@ -13,15 +13,22 @@
 	<properties>
 		<spring.ws.version>2.0.5.RELEASE</spring.ws.version>
 		<wsdl4j.version>1.6.2</wsdl4j.version>
+		<xml.schema.version>1.4.7</xml.schema.version>
 		<httpclient.version>3.1</httpclient.version>
+		<xml.unit.version>1.3</xml.unit.version>
 	</properties>
 
 	<dependencies>
-	<dependency>
+		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-servlet_3.0_spec</artifactId>
 			<version>${servlet.spec.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ws.commons.schema</groupId>
+			<artifactId>XmlSchema</artifactId>
+			<version>${xml.schema.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.ws</groupId>
@@ -64,7 +71,7 @@
 		<dependency>
 			<groupId>xmlunit</groupId>
 			<artifactId>xmlunit</artifactId>
-			<version>1.3</version>
+			<version>${xml.unit.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -7,15 +7,15 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import be.gallifreyan.api.EntityService;
-import be.gallifreyan.logging.annotation.LoggableClass;
 import be.gallifreyan.persistence.entity.Developer;
 import be.gallifreyan.persistence.repo.Repository;
 
 @Service
-@LoggableClass
 public class DeveloperService implements EntityService<Developer> {
 	Repository<Developer> repository;
-
+	
+	public DeveloperService(){}
+	
 	@Inject
 	public final void setRepository(final Repository<Developer> repository) {
 		this.repository = repository;

@@ -1,7 +1,5 @@
 package be.gallifreyan.ws.server.service.impl;
 
-import java.util.Calendar;
-
 import org.apache.commons.lang.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,12 +29,13 @@ public class OrderServiceImpl implements OrderService {
     }
     
     private String getRandomOrderRefNo() {
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        return "Ref-" + year + "-" + month + "-" + day + "-" + Math.random();
-        
+    	/*
+    	 * Calendar calendar = Calendar.getInstance();
+         * int year = calendar.get(Calendar.YEAR);
+         * int month = calendar.get(Calendar.MONTH);
+         * int day = calendar.get(Calendar.DAY_OF_MONTH);
+         * return "Ref-" + year + "-" + month + "-" + day + "-" + Math.random();
+         */
+        return "10";
     }
 }

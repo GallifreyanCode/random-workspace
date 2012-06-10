@@ -7,7 +7,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>spring-new-itest</artifactId>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -40,6 +40,11 @@
 			<artifactId>spring-new-persistence</artifactId>
 			<groupId>be.gallifreyan.spring</groupId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

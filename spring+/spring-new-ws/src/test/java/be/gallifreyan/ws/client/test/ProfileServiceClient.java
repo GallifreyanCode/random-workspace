@@ -28,7 +28,7 @@ public class ProfileServiceClient {
 
 		UserProfileCreateResponse response = (UserProfileCreateResponse) webServiceTemplate
 				.marshalSendAndReceive(request);
-		System.out.println(response.getMessage());
+		System.out.println("ResponseMessage: " + response.getMessage());
 		return response.getMessage();
 	}
 }

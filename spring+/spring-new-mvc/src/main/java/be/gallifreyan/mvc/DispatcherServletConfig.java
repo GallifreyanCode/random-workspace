@@ -46,11 +46,7 @@ public class DispatcherServletConfig implements WebApplicationInitializer {
 		ServletRegistration.Dynamic appServlet = servletContext.addServlet("spring", new DispatcherServlet(mvcContext));
 		appServlet.setLoadOnStartup(1);
 		Set<String> mappingConflicts = appServlet.addMapping("/");
-		
-		/* Spring WS
-		ServletRegistration.Dynamic greetinService = servletContext.addServlet("GreetinService", "be.gallifreyan.ws.ExampleEndpoint");
-		greetinService.addMapping("/GreetingService"); */
-		
+				
 		if (!mappingConflicts.isEmpty()) {
 			throw new IllegalStateException("'spring' cannot be mapped to '/' under Tomcat versions <= 7.0.14 or Jetty without webdefault tweak.");
 		}		

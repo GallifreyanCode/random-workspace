@@ -4,12 +4,10 @@ import java.util.Properties;
 
 import javax.inject.Inject;
 
-import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -19,8 +17,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import be.gallifreyan.config.profile.DataConfig;
-import be.gallifreyan.logging.aspect.LoggingAspectClass;
-import be.gallifreyan.logging.aspect.LoggingAspectMethod;
 
 @Configuration
 @EnableTransactionManagement

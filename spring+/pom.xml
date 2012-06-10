@@ -7,7 +7,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<java.version>1.7</java.version>
+		<java.version>1.6</java.version>
 		<jetty.plugin.version>8.1.3.v20120416</jetty.plugin.version>
 		<inject.version>1</inject.version>
 		<servlet.spec.version>1.0</servlet.spec.version>
@@ -49,7 +49,7 @@
 		<module>spring-new-mvc</module>
 		<module>spring-new-itest</module>
 		<module>spring-new-ws</module>
-		<module>spring-new-rest</module>
+		<module>spring-new-persistence-rest</module>
 	</modules>
 
 	<dependencies>

@@ -11,6 +11,6 @@ appender("STDOUT", ConsoleAppender) {
   }
 }
 
-logger("be", DEBUG)
+logger("be", INFO)
 logger("org.springframework", ERROR)
 root(ERROR, ["STDOUT"])

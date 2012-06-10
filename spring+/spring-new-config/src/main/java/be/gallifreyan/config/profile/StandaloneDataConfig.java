@@ -1,8 +1,8 @@
 package be.gallifreyan.config.profile;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -15,7 +15,8 @@ import be.gallifreyan.config.profile.annotation.Dev;
 @Dev
 @PropertySource("classpath:/persistence-dev.properties")
 public class StandaloneDataConfig implements DataConfig {
-	@Autowired
+
+	@Inject
 	private Environment env;
 
 	@Bean
@@ -28,7 +29,6 @@ public class StandaloneDataConfig implements DataConfig {
 		return dataSource;
 	}
 
-	@Override
 	public String getDatabasePlatform() {
 		return env.getProperty("jdbc.platform");
 	}

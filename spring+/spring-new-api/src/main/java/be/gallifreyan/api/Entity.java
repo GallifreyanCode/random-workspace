@@ -1,5 +1,6 @@
 package be.gallifreyan.api;
 
+
 /** <p>This is the <b>parent interface</b> for entities,
  * all global characteristics and behavior are defined here.</p>
  * Each entity should have
