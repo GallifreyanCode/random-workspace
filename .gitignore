@@ -8,4 +8,4 @@
 *.classpath
 *.jmod
 target/
-/javaee-example/javaee-example-war/chromedriver.log
+chromedriver.log
