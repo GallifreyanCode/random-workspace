@@ -1,7 +1,0 @@
-Todo:
-More security
-More REST
-Spring AMQP
-Spring Security OAuth
-Spring Mobile
-Spring Web Flow
